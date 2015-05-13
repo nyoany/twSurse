@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Admin Page</title>
+  <link rel="stylesheet" type="text/css" href="AdminPage.css">
+</head>
+
+<body>
+
+	<div id="main">
+		<div id="headerBar">
+			<div id="leftHeader">
+				<span id="page-title"><H1>Admin User:</H1></span>
+			</div>
+			<div id="rightHeader">
+				<input type="submit" value="Logout" class="generalButton">
+			</div>
+		</div>
+		
+		<div id="adminUser">
+			<div id="addNewRace">
+				<form action="add race.html">
+					<fieldset class="fieldSetClass">
+						<legend>Add New Race</legend>
+						<br><br>
+						<div id="addRaceLeft">
+							<span id="participants">Participants</span>
+							<br><br>1:
+							<input list="participant1">
+							<datalist id="participant1">
+								<option value="Rat1">
+								<option value="Rat2">
+								<option value="Rat3">
+								<option value="Rat4">
+								<option value="Rat5">
+							</datalist>
+							<br><br>2:
+							<input list="participant2">
+							<datalist id="participant2">
+								<option value="Rat1">
+								<option value="Rat2">
+								<option value="Rat3">
+								<option value="Rat4">
+								<option value="Rat5">
+							</datalist>
+						</div>
+						<div id="addRaceRight">
+							<span id="cota">Cota</span>
+							<br><br>
+							<input type="text">
+							<br><br>
+							<input type="text">
+						</div>
+					</fieldset>
+				</form> 
+			</div>
+			<div id="activeRaces">
+				<form action="nu stiu.html">
+					<fieldset class="fieldSetClass">
+						<legend>Active Races:</legend>
+						<br><br>
+
+					</fieldset>
+				</form> 
+			</div>
+		</div>
+	</div>
+</body>
+</html> 
