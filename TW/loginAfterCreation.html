@@ -4,10 +4,26 @@
 <head>
   <title>Login page</title>
   <link rel="stylesheet" type="text/css" href="login.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+        $("#createAccountdiv").fadeOut(3000);
+    });
+});
+</script>
 </head>
 
 <body>
 <div id="main">
+<div id="createAccountdiv">
+<?php
+require 'createUser.php';
+if ( $result ) {
+ echo $result;
+}
+?>
+
+</div>
 <span id="page-title"><H1>Login Page</H1></span>
  <form action="checkUser.php" method="POST">
   <fieldset class="fieldSetClass">
