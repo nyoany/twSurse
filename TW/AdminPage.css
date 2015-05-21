@@ -33,16 +33,6 @@ body {
 	float:right;
 }
 
-#addRaceLeft {
-	width: 50%; 
-	float:left;
-}
-
-#addRaceRight {
-	width: 50%; 
-	float:right;
-}
-
 .fieldSetClass{
  margin: 100px;
  width: auto;
