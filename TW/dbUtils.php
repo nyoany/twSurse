@@ -22,7 +22,7 @@ VALUES ('" .$firstname ."','" .$lastname ."','"
  .$birthdate ."','" .$email ."','" .$username ."', '" .$password ."', '" .$safetyword ."','user')";
 
 if ($conn->query($sql) === TRUE) {
-    $result = "New record created successfully";
+    $result = "You have been added successfully to the site. Please login.";
 } else {
     $result = "Error: " . $sql . "<br>" . $conn->error;
 }

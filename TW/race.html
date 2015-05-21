@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>The race started!</title>
+<meta http-equiv="refresh" content="1">
+<link rel="stylesheet" type="text/css" href="race.css">
+<script type="text/javascript">
+<?php
+		require 'raceDbUtils.php';
+		$db =  new RaceDbUtils();
+?>
+	var firstHamstersPosition =
+	<?php
+		$result = $db->getFirstRatPosition();	
+		echo $result;
+	?>;
+	var secondHamstersPosition = <?php
+		$result = $db->getSecondRatPosition();	
+		echo $result;
+	?>;		
+var foo = null; 
+var foo2 = null;
+function doMove() {
+ if(firstHamstersPosition > 1084 || secondHamstersPosition > 1084){
+ 
+	if(firstHamstersPosition > 1084){
+	    var finalState = firstHamstersPosition + 1084 -  firstHamstersPosition;
+	
+		document.getElementById('firstMouse').style.left = firstHamstersPosition + 1084 -  firstHamstersPosition +'px';
+		
+		
+	}
+	else if(secondHamstersPosition > 1084){
+		document.getElementById('secondMouse').style.left = secondHamstersPosition + 1084 -  secondHamstersPosition +'px';
+	   
+	}
+	return;
+ }
+  document.getElementById('firstMouse').style.left = firstHamstersPosition +'px';
+  document.getElementById('secondMouse').style.left = secondHamstersPosition +'px';
+  setTimeout(doMove,20); // call doMove in 20msec
+  }
+
+function init() {
+  foo = document.getElementById('firstMouse'); // get the "foo" object
+  foo.style.left = '0px'; // set its initial position to 0px
+  foo2 = document.getElementById('secondMouse'); // get the "foo" object
+  foo2.style.left = '0px'; // set its initial position to 0px
+  doMove(); // start animating
+}
+
+
+window.onload = init;
+
+</script>
+</head>
+
+<body>
+
+<h1>The race started!</h1>
+<div class= "pista">
+<div id="firstMouse">   
+</div>
+
+<div id="secondMouse">
+</div>
+</div>
+
+</body>
+</html>

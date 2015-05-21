@@ -1,0 +1,48 @@
+body {
+ font:bold 14px sans-serif
+}
+
+h1, h2 {
+ font-size:1em;
+ margin-top:20px;
+ margin-left:600px;
+}
+
+div.pista{
+width:  1200px;
+height: 600px;
+border: 2px solid #003366;
+margin-left: 100px;
+margin-top:50px;
+}
+#firstMouse{
+ /* simple box */
+ position:relative;
+ left:0px;
+ top:8em;;
+ width:80px;
+ line-height:3em;
+ content:url(http://i58.tinypic.com/25zs94y.jpg);
+ border:1px solid #003366;
+ white-space:nowrap;
+ padding:0.5em;
+}
+
+#secondMouse {
+ /* simple box */
+ position:relative;
+ left:0px;
+ top:8em;
+ width:80px;
+ line-height:3em;
+ content:url(http://i60.tinypic.com/35i86ee.jpg);
+ border:1px solid #003366;
+ white-space:nowrap;
+ padding:0.5em;
+}
+
+div{
+    
+    margin : 20px;
+    
+}
