@@ -2,17 +2,22 @@
 <html>
 
 <head>
-  <title>Admin Page</title>
-  <link rel="stylesheet" type="text/css" href="AdminPage.css">
+  <title>Update Race:</title>
+  <link rel="stylesheet" type="text/css" href="UpdateRace.css">
   <link rel="stylesheet" type="text/css" href="template.css">
 </head>
+
+<?php
+	require 'UpdateRace.php';
+	$db =  new DbUpdateRace();
+?>
 
 <body>
 
 	<div id="main">
 		<div id="headerBar">
 			<div id="leftHeader">
-				<span id="page-title"><H1>Admin User:</H1></span>
+				<span id="page-title"><H1>Update Race:</H1></span>
 			</div>
 			<div id="rightHeader">
 				<input type="submit" value="Logout" class="generalButton">
@@ -21,50 +26,32 @@
 		
 		<div id="adminUser">
 			<div class="divLeft"">
-				<form action="AddRace.php" method="POST">
+				<form action="add race.html">
 					<fieldset class="fieldSetClass">
-						<legend>Add New Race</legend>
+						<legend>Update Race</legend>
 						<div class="divLeft">
 							<span id="participants">Participants</span>
 							<br><br>1:
-							<input list="participant1" name="participant1">
+							<?php echo "<input list='participant1' value='".$db->getParticipants("participant1")."' disabled='true'>";?>
 							<datalist id="participant1">
-								<?php
-									require 'AdminPage.php';
-									$db =  new DbAdminPage();
-									$result = $db->getParticipants();
-									foreach ($result as $participant)
-									{
-										echo "<option value='".$participant."'>";
-									}
-								?>
 							</datalist>
 							<br><br>2:
-							<input list="participant2" name="participant2">
+							<?php echo "<input list='participant2' value='".$db->getParticipants("participant2")."' disabled='true'>";?>
 							<datalist id="participant2">
-								<?php
-									$result = $db->getParticipants();
-									foreach ($result as $participant)
-									{
-										echo "<option value='".$participant."'>";
-									}
-								?>
 							</datalist>
 							<br><br>
 							<span id="Date">Date</span>
-							<input type="date" name="date">
-							<br><br>
-							<input type="submit" value="Add Race" class="generalButton">
+							<input type="date">
 						</div>
 						<div class="divRight">
 							<span id="cota">Cota</span>
 							<br><br>
-							<input type="text" name="cota1">
+							<?php echo "<input type='text' value='".$db->getCota("participant1")."' disabled='true'>";?>
 							<br><br>
-							<input type="text" name="cota2">
+							<?php echo "<input type='text' value='".$db->getCota("participant2")."' disabled='true'>";?>
 							<br><br>
 							<span id="Time">Time</span>
-							<input type="time"  name="time">
+							<input type="time">
 						</div>
 					</fieldset>
 				</form> 
@@ -82,7 +69,7 @@
 							<thead>
 							<tbody>
 								<?php
-									$db->getActiveRaces();
+									$result = $db->getActiveRaces();
 								?>
 							</tbody>
 						</table>
