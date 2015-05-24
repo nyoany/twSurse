@@ -2,53 +2,72 @@
 <html>
 <head>
 <title>The race started!</title>
-<meta http-equiv="refresh" content="1">
 <link rel="stylesheet" type="text/css" href="race.css">
+<meta http-equiv="refresh" content="0.5">
 <script type="text/javascript">
+
 <?php
 		require 'raceDbUtils.php';
 		$db =  new RaceDbUtils();
 ?>
-	var firstHamstersPosition =
-	<?php
-		$result = $db->getFirstRatPosition();	
+
+	var firstHamstersPosition = <?php
+		$result = $db->getFirstRatFinalPosition();	
 		echo $result;
 	?>;
 	var secondHamstersPosition = <?php
-		$result = $db->getSecondRatPosition();	
+		$result = $db->getSecondRatFinalPosition();	
 		echo $result;
-	?>;		
-var foo = null; 
-var foo2 = null;
+	?>;
+    	
+
 function doMove() {
- if(firstHamstersPosition > 1084 || secondHamstersPosition > 1084){
+
+ if(firstHamstersPosition >= 1084 || secondHamstersPosition >= 1084){
  
-	if(firstHamstersPosition > 1084){
-	    var finalState = firstHamstersPosition + 1084 -  firstHamstersPosition;
-	
-		document.getElementById('firstMouse').style.left = firstHamstersPosition + 1084 -  firstHamstersPosition +'px';
-		
+    <?php
+	   $db->setWinner();
+	   $db->setLoserPosition();
+	   ?>
+	if(firstHamstersPosition >= 1084){
+		document.getElementById('firstMouse').style.left = '1084px';
+		document.getElementById('secondMouse').style.left = '<?php echo $db->getLoserPosition(); ?>px';
 		
 	}
-	else if(secondHamstersPosition > 1084){
-		document.getElementById('secondMouse').style.left = secondHamstersPosition + 1084 -  secondHamstersPosition +'px';
+	else if(secondHamstersPosition >= 1084){
+	    document.getElementById('secondMouse').style.left = '1084px';
+		document.getElementById('firstMouse').style.left = '<?php echo $db->getLoserPosition(); ?>px';
 	   
 	}
-	return;
  }
-  document.getElementById('firstMouse').style.left = firstHamstersPosition +'px';
-  document.getElementById('secondMouse').style.left = secondHamstersPosition +'px';
-  setTimeout(doMove,20); // call doMove in 20msec
+ else{
+ 	var firstHamstersUpdatedPosition = <?php
+		$result = $db->updateFirstRatPosition();	
+		echo $result;
+	?>;
+    var secondHamstersUpdatedPosition = <?php
+		$result = $db->updateSecondRatPosition();	
+		echo $result;
+	?>;
+	
+	if(firstHamstersUpdatedPosition >= 1084){
+	document.getElementById('firstMouse').style.left = '1084px';
+    document.getElementById('secondMouse').style.left = secondHamstersUpdatedPosition + 'px';
+	} 
+	else if(secondHamstersUpdatedPosition >=1084){
+	document.getElementById('firstMouse').style.left = firstHamstersUpdatedPosition+ 'px';
+    document.getElementById('secondMouse').style.left = '1084px';
+	}
+	else{
+  document.getElementById('firstMouse').style.left = firstHamstersUpdatedPosition+ 'px';
+  document.getElementById('secondMouse').style.left = secondHamstersUpdatedPosition + 'px';
+  }
+  }
   }
 
 function init() {
-  foo = document.getElementById('firstMouse'); // get the "foo" object
-  foo.style.left = '0px'; // set its initial position to 0px
-  foo2 = document.getElementById('secondMouse'); // get the "foo" object
-  foo2.style.left = '0px'; // set its initial position to 0px
-  doMove(); // start animating
+doMove();
 }
-
 
 window.onload = init;
 
