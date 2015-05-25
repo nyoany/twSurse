@@ -63,7 +63,7 @@ class AllRacesDB{
 				echo "</td>";				
 				
   				echo "<td>";
-				echo "<a href='RatDetails.html?RatName=".strval($row["r1"])."'>";
+				echo "<a href='RatDetails.html?RatName=".strval($row["r1"])."&Date=".strval($row["date"])."&Time=".strval($row["time"]) ."'>";
 	            echo $row["r1"];
 				echo "</td>";
 				
