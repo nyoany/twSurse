@@ -1,0 +1,40 @@
+.divLeft {
+	width: 50%; 
+	height:300px;
+	float:left;
+}
+
+.divRight {
+	width: 50%;
+	height:300px;
+	float:right;
+}
+
+.panel {
+	height:300px;
+}
+
+th {
+    background-color: #E9E9E9;
+    color: #232323;
+    font-weight: 700;
+    border: 1px solid #D3D3D3;
+}
+
+tr {
+    font-weight: 700;
+    border: 1px solid #D3D3D3;
+}
+
+td {
+    font-weight: 700;
+    border: 1px solid #D3D3D3;
+}
+
+table {
+	width: 100%;
+    border: 1px solid #D3D3D3;
+    font-weight: 400;
+    line-height: 1;
+}
+
