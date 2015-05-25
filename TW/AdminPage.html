@@ -9,6 +9,13 @@
 
 <body>
 
+<?php
+require "AddRace.php";
+$addNewRace = new DbAddRace();
+$addNewRace->addRace();
+
+?>
+
 	<div id="main">
 		<div id="headerBar">
 			<div id="leftHeader">
@@ -21,7 +28,7 @@
 		
 		<div id="adminUser">
 			<div class="divLeft"">
-				<form action="AddRace.php" method="POST">
+				<form action="AdminPage.html" method="POST">
 					<fieldset class="fieldSetClass">
 						<legend>Add New Race</legend>
 						<div class="divLeft">
@@ -93,3 +100,4 @@
 	</div>
 </body>
 </html> 
+

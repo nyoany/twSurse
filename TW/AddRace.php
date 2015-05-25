@@ -2,6 +2,7 @@
 class DbAddRace{
 
 	function insertRace($date, $participant1, $participant2){
+		
 		$servername = "localhost";
 		$dbusername = "root";
 		$dbpassword = "root";
@@ -26,7 +27,7 @@ class DbAddRace{
 		$conn->close();
 	}
 	
-	function updateCota($cota){
+	function addCota($cota){
 		$servername = "localhost";
 		$dbusername = "root";
 		$dbpassword = "root";
@@ -51,13 +52,15 @@ class DbAddRace{
 	}	
 	
 	function addRace(){
-
+		if ($_POST['participant1'] != null){
 		//echo "<script>alert('".$_POST['date']." ".$_POST["time"].":00"."');</script>";
 
-		$this->insertRace($_POST['date']." ".$_POST["time"],$_POST["participant1"], $_POST["participant2"]);
+		$this->insertRace($_POST['date']." ".$_POST['time'],$_POST['participant1'], $_POST['participant2']);
+		}
 	}
+	
+	
 }
-$addNewRace = new DbAddRace();
-$addNewRace->addRace();
+
 
 ?>
