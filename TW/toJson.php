@@ -9,7 +9,7 @@ $output = fopen('php://output', 'w');
 
 
 // fetch the data
-mysql_connect('localhost', 'root', 'licenta_dbP@ss1');
+mysql_connect('localhost', 'root', 'root');
 mysql_select_db('dball');
 $rows = mysql_query('SELECT id,username FROM users');
 $response = array();
