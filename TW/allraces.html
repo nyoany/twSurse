@@ -2,20 +2,63 @@
 <html>
 
 <head>
-  <title>AllRaces</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>All Races</title>
+  <link rel="stylesheet" type="text/css" href="AdminPage.css">
+  <link rel="stylesheet" type="text/css" href="template.css">
 </head>
 
 <body>
-<div id= "banner"></div>
-<div id="main">
-<span id="page-title"><H1>All Races</H1></span>
- <form>
-<input type="button" value="Back" class="generalButton" onClick="history.go(-1);return true;"></input>
-</form> 
-<div id="footerI">
-<?php require 'footer.php';?>
-</div>
-</div>
+<?php
+require "allRaces.php";
+$allRaces = new AllRacesDB();
+?>
+	<div id="main">
+		<div id="headerBar">
+			<div id="leftHeader">
+				<span id="page-title"><H1>All Races:</H1></span>
+				<input type="button" value="Back" class="generalButton" onClick="history.go(-1);return true;"></input>
+			</div>
+			<div id="rightHeader">
+				<input type="submit" value="Logout" class="generalButton">
+			</div>
+		</div>
+		
+		<div id="adminUser">
+			<div class="divLeft"">
+				<form action="allRaces.php" method="GET">
+					<fieldset class="fieldSetClass">
+						<legend>Past/Future Races</legend>
+		
+							<span id="participants">Participants</span>
+							<table class="tabel">
+							<thead>
+								<th>Crt</th>
+								<th>Date</th>
+								<th>Time</th>
+								<th>First Participant</th>
+								<th>Second Participant</th>
+							<thead>
+							<tbody>
+								<?php
+									$allRaces->getActiveRaces();
+								?>
+							</tbody>
+						</table>
+	
+					</fieldset>
+				</form> 
+			</div>
+			<div class="divRight">
+				<form action="nu stiu.html">
+					<fieldset class="fieldSetClass">
+						<legend>Comments:</legend>
+						
+					</fieldset>
+				</form> 
+			</div>
+		</div>
+	</div>
 </body>
 </html> 
+
+
