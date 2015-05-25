@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Curent User</title>
+  <link rel="stylesheet" type="text/css" href="AdminPage.css">
+  <link rel="stylesheet" type="text/css" href="template.css">
+</head>
+<body>
+   <div id="main">
+<?php
+require 'RatDetailsDB.php';
+$rd=new RatDetails();
+?>
+<div id="headerBar">
+			<div id="leftHeader">
+				<span id="page-title"><H1>Curent User:</H1></span>
+				
+			</div>
+			<div id="rightHeader">
+			<input type="button" value="LogOut" class="generalButton" onClick=";"></input>
+			</div>
+		</div>
+
+	<div id="adminUser">
+			<div id="addNewRace">
+				<form action="add race.html">	
+					<fieldset class="fieldSetClass">
+						<legend>Today's Races</legend>
+							<table class="tabel">
+							<thead>
+								<th>Crt</th>
+								<th>Time</th>
+								<th>Concurent1</th>
+								<th>Concurent2</th>
+							<thead>
+							<tbody>
+								<tr>
+									<td>ceva</td>
+									<td>ceva</td>
+									<td>ceva</td>
+									<td>ceva</td>
+								</tr>
+							</tbody>
+						</table>
+
+					
+<div class="divLeft">						
+<br><br>
+<a href="allraces.html"> <button type="button">AllRaces</button></a>
+</div>
+</fieldset>
+
+</div>
+
+		<div id="activeRaces">
+				
+					<fieldset class="fieldSetClass">
+						<legend>Your Bets:</legend>
+						<table class="tabel">
+							<thead>
+								<th>Crt</th>
+								<th>Date</th>
+								<th>Time</th>
+								<th>Rat</th>
+								<th>Amount Bet</th>
+							<thead>
+							<tbody>
+								<tr>
+									<td>ceva</td>
+									<td>ceva</td>
+									<td>ceva</td>
+									<td>ceva</td>
+									<td>ceva</td>
+								</tr>
+							</tbody>
+						</table>
+					</fieldset>
+				 
+			</div>
+
+</div>
+	</div>
+</body>
+</html> 

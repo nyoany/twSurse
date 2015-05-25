@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Rat Details</title>
+  <link rel="stylesheet" type="text/css" href="AdminPage.css">
+  <link rel="stylesheet" type="text/css" href="t.css">
+</head>
+<body>
+   <div id="main">
+<?php
+require 'RatDetailsDB.php';
+$rd=new RatDetails();
+?>
+<div id="headerBar">
+			<div id="leftHeader">
+				<span id="page-title"><H1>Rat Details:</H1></span>
+				<input type="button" value="Back" class="generalButton" onClick="history.go(-1);return true;"></input>
+			</div>
+					
+		</div>
+			
+	<div id="adminUser">
+			<div id="addNewRace">
+				<form action="add race.html">	
+					<fieldset class="fieldSetClass">
+						<legend>Bet On Rat</legend>
+					
+<div class="divLeft">						
+<br>Rat Name: 
+<?php
+echo $rd->getRatName();
+?>
+<br>
+<br>Wins: <?php
+echo $rd->getRatWins();
+?>
+<br>
+<br>Loses: <?php
+echo $rd->getRatLoses();
+?>
+<br>
+<br>Cota: <input  class= "decimal" type="text" value="<?php
+echo $rd->getCota();
+?>" disabled="true"></input>
+</div>
+<div class="divRight">
+<br>Data
+<input type="date" name="data" disabled="true"></input>
+<br>
+<br>Time
+<input type="time" name="data" disabled="true"></input>
+<br>
+<br>Amount <input class= "decimal" type="number" step="any"> </input>
+ <br><br>
+<input id="submitBet" type="submit" value="submitBet">
+</div>
+</fieldset>
+</form>
+</div>
+
+		<div id="activeRaces">
+				
+					<fieldset class="fieldSetClass">
+						<legend>Attended Races:</legend>
+						<table class="tabel">
+							<thead>
+								<th>Crt</th>
+								<th>Date</th>
+								<th>Time</th>
+								<th>Status</th>
+							<thead>
+							<tbody>
+								<tr>
+									<td>ceva</td>
+									<td>ceva</td>
+									<td>ceva</td>
+									<td>ceva</td>
+								</tr>
+							</tbody>
+						</table>
+					</fieldset>
+				 
+			</div>
+
+</div>
+	</div>
+</body>
+</html> 
