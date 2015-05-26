@@ -5,12 +5,36 @@
   <title>All Races</title>
   <link rel="stylesheet" type="text/css" href="AdminPage.css">
   <link rel="stylesheet" type="text/css" href="template.css">
+  <script type="text/javascript">
+
+function loadData(str) {
+    if (str == "") {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","allRaces.php?q="+str,true);
+        xmlhttp.send();
+    }
+}
+
+  </script>
 </head>
 
 <body>
 <?php
 require "allRaces.php";
-$allRaces = new AllRacesDB();
 ?>
 	<div id="main">
 		<div id="headerBar">
@@ -30,23 +54,11 @@ $allRaces = new AllRacesDB();
 						<legend>Past/Future Races</legend>
 		                     <br><br>
 							<span id="participants">Select date: </span>
-							<input type="date" name="date">
+							<input id ="dateAsync" type="date" name="date" onchange = "loadData(this.value)">
 							<br><br>
-							<table class="tabel">
-							<thead>
-								<th>Crt</th>
-								<th>Date</th>
-								<th>Time</th>
-								<th>First Participant</th>
-								<th>Second Participant</th>
-							<thead>
-							<tbody>
-								<?php
-									$allRaces->getActiveRaces();
-								?>
-							</tbody>
-						</table>
-	
+							<div id="txtHint"><b>No data to display...</b>
+							
+	</div>
 					</fieldset>
 				</form> 
 			</div>

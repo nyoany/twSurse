@@ -1,55 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+th {text-align: left;}
+</style>
+</head>
+<body>
+
 <?php
-class AllRacesDB{
+$q = $_GET['q'];
 
-	function getParticipants(){
-		$result;
-		$index = 0;
-		$servername = "localhost";
-		$dbusername = "root";
-		$dbpassword = "root";
-		$dbname = "dball";
-		// Create connection
-		$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+$conn = mysqli_connect('localhost','root','root','dball');
+if (!$conn) {
+    die('Could not connect: ' . mysqli_error($conn));
+}
+$without = str_replace('-', '', strval($q));
+$year =substr($without,0, 4);
+$month =substr($without,4, 2);
+$day =substr($without,6, 2);
+$sql = "Select r.id, DATE_FORMAT(r.date,'%d-%m-%Y') as date, DATE_FORMAT(r.date,'%h:%i:00') as time,
+ r1.name as r1, r2.name as r2 from races as r, rats as r1, rats as r2 where (r1.id = r.participant1) 
+ and (r2.id = r.participant2) and EXTRACT(DAY from r.date) = '".$day."' and EXTRACT(MONTH from r.date) = '".$month."' and EXTRACT(YEAR from r.date) = '"
+.$year ."';";
 
-		// Check connection
-		if ($conn->connect_error) {
-			die("Connection to database failed: " . $conn->connect_error);
-		}
-		
-		$sql = "SELECT name FROM rats;";
-
-		$positions = $conn->query($sql);
-		if ($positions->num_rows > 0) {
-			 while($row = $positions->fetch_assoc()) {
-				$result[$index]= $row["name"];
-				$index = $index + 1;
-			 }
-		}
-		
-		$conn->close();
-		return $result;
-	}
-	
-	function getActiveRaces(){
-		$index = 1;
-		$servername = "localhost";
-		$dbusername = "root";
-		$dbpassword = "root";
-		$dbname = "dball";
-		// Create connection
-		$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
-
-		// Check connection
-		if ($conn->connect_error) {
-			die("Connection to database failed: " . $conn->connect_error);
-		}
-		
-		$sql = "Select r.id, DATE_FORMAT(r.date,'%d-%m-%Y') as date, DATE_FORMAT(r.date,'%h:%i:00') as time, r1.name as r1, r2.name as r2 from races as r, rats as r1, rats as r2 where (date > curdate()) and (r1.id = r.participant1) and (r2.id = r.participant2);";
-
-		$positions = $conn->query($sql);
-		if ($positions != null) {
-		if($positions->num_rows > 0){
-			 while($row = $positions->fetch_assoc()) {
+$index = 1;
+$races = $conn->query($sql);
+		if ($races != null) {
+		if($races->num_rows > 0){
+		echo"<table class='tabel'>
+							<thead>
+								<th>Crt</th>
+								<th>Date</th>
+								<th>Time</th>
+								<th>First Participant</th>
+								<th>Second Participant</th>
+							<thead>
+							<tbody>
+						";
+			 while($row = $races->fetch_assoc()) {
 				echo "<tr><td>";
 				echo $index;
 				echo "</td>";
@@ -68,16 +66,17 @@ class AllRacesDB{
 				echo "</td>";
 				
 				echo "<td>";
-				echo "<a href='RatDetails.html?RatName=".strval($row["r2"])."'>";
+				echo "<a href='RatDetails.html?RatName=".strval($row["r2"])."&Date=".strval($row["date"])."&Time=".strval($row["time"]) ."'>";
 	            echo $row["r2"];
 				echo "</td></tr>";
-				
 				$index = $index + 1;
 			 }
+			 echo "</tbody>
+					</table>";
 		}
 		}
 		
 		$conn->close();
-	}
-}
 ?>
+</body>
+</html>
