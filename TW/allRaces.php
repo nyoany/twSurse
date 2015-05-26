@@ -18,8 +18,8 @@ th {text-align: left;}
 <body>
 
 <?php
+if(isset($_GET['q'])){
 $q = $_GET['q'];
-
 $conn = mysqli_connect('localhost','root','root','dball');
 if (!$conn) {
     die('Could not connect: ' . mysqli_error($conn));
@@ -77,6 +77,7 @@ $races = $conn->query($sql);
 		}
 		
 		$conn->close();
+		}
 ?>
 </body>
 </html>
