@@ -1,0 +1,4 @@
+alter table comentaries modify column ID int AUTO_INCREMENT;
+alter table comentaries modify column commentary VARCHAR(1000);
+insert into comentaries (raceID,userID,commentary) values('1','1','It will be the best race ever!! I really can not wait for it.');
+insert into comentaries (raceID,userID,commentary) values('1','2','I think it will be a draw.');
