@@ -16,6 +16,10 @@ $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 if ($conn->connect_error) {
     die("Connection to database failed: " . $conn->connect_error);
 }
+if($this->verifyUserExists($username, $password) != null){
+
+return "A user with the username ".$username." already exists in the system.";
+}
 
 $sql = "INSERT INTO users (firstname, lastname, birthdate, email, username, password, safetyword, role)
 VALUES ('" .$firstname ."','" .$lastname ."','"
@@ -45,13 +49,20 @@ if ($conn->connect_error) {
     die("Connection to database failed: " . $conn->connect_error);
 }
 
-$sql ="select * from users where username = '" .$username ."' and password = '" . $password ."';";
+$sql ="select role from users where username = '" .$username ."' and password = '" . $password ."';";
 $queryr = $conn->query($sql);
 if ($queryr->num_rows > 0) {
-$result = "exists";
+while($row = $queryr->fetch_assoc()) {
+if($row["role"] === "admin"){
+return "admin";
+}
+else if($row["role"]==="user"){
+return "user";
+}
+}
 }
 else{
-$result = "";
+$result = null;
 }
 return $result;
 }

@@ -7,6 +7,15 @@
   <link rel="stylesheet" type="text/css" href="template.css">
   <script type="text/javascript">
 
+function logOut(){
+  <?php
+  if(isset($_COOKIE["username"])){
+  unset($_COOKIE["username"]);
+  setCookie("username", "", time()-3600, "/");
+  }
+  ?>
+ }
+ 
 function loadData(str) {
     if (str == "") {
         document.getElementById("txtHint").innerHTML = "";
@@ -26,29 +35,33 @@ function loadData(str) {
         }
         xmlhttp.open("GET","allRaces.php?q="+str,true);
         xmlhttp.send();
+		
     }
 }
-
   </script>
 </head>
 
 <body>
 <?php
 require "allRaces.php";
+require "comments.php";
 ?>
 	<div id="main">
 		<div id="headerBar">
 			<div id="leftHeader">
 				<span id="page-title"><H1>All Races:</H1></span>
-				<input type="button" value="Back" class="generalButton" onClick="history.go(-1);return true;"></input>
+				<a href="http://localhost/twsurse/TW/CurentUser.html">
+				<input type="button" value="Back" class="generalButton"></input>
+				</a>
 			</div>
 			<div id="rightHeader">
-				<input type="submit" value="Logout" class="generalButton">
+			<a href="http://localhost/twsurse/TW/Login.html" style="text-decoration:none;">
+				<input type="button" value="Logout" class="generalButton" onClick ="logOut()">
+				</a>
 			</div>
 		</div>
 		
 		<div id="adminUser">
-			<div class="divLeft"">
 				<form action="allRaces.php" method="GET">
 					<fieldset class="fieldSetClass">
 						<legend>Past/Future Races</legend>
@@ -62,15 +75,6 @@ require "allRaces.php";
 					</fieldset>
 				</form> 
 			</div>
-			<div class="divRight">
-				<form action="nu stiu.html">
-					<fieldset class="fieldSetClass">
-						<legend>Comments:</legend>
-						
-					</fieldset>
-				</form> 
-			</div>
-		</div>
 	</div>
 </body>
 </html> 

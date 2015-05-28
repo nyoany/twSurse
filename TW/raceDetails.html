@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Race Details</title>
+  <link rel="stylesheet" type="text/css" href="AdminPage.css">
+  <link rel="stylesheet" type="text/css" href="template.css">
+</head>
+
+<body>
+<?php
+require "raceDetails.php";
+$raceDetails = new RaceDetails();
+?>
+	<div id="main">
+		<div id="headerBar">
+			<div id="leftHeader">
+				<span id="page-title"><H1>Race Details:</H1></span>
+				<a href="http://localhost/twsurse/TW/allraces.html">
+				<input type="button" value="Back" class="generalButton"></input>
+				</a>
+			</div>
+			<div id="rightHeader">
+				<input type="submit" value="Logout" class="generalButton"/>
+			</div>
+		</div>
+		
+		<div id="adminUser">
+		<div class = "divLeft">
+		<fieldset class="fieldSetClass">
+		<br>
+		<legend>Details:</legend>
+			<?php
+							echo $raceDetails->getDetails();
+							?>
+		
+		</fieldset>
+		
+		</div>
+		
+			<div class="divRight"">
+				<form action="raceDetails.html?raceID=<?php echo $raceDetails->getCurrentRaceID(); ?>" method = "POST">
+					<fieldset class="fieldSetClass">
+						<legend>Comments:</legend>
+						<br>
+						<b>Add your comments: </b>
+						<br>
+					   <textarea rows="4" cols = "50" name ="comment"></textarea> 
+						<br><br>
+						<input type="text" value = "<?php echo $raceDetails->getCurrentRaceID(); ?>" name="raceID" style="display:none;">
+						<input type="submit" name= "Comment"/>
+						<br><br>
+						<div class="container">
+						<div id="commentsSection">
+							<?php
+							echo $raceDetails->getComments();
+							?>
+	</div>
+	</div>
+					</fieldset>
+				</form> 
+			
+			</div>
+	</div>
+</body>
+</html> 
+
+

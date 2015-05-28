@@ -28,7 +28,7 @@ $without = str_replace('-', '', strval($q));
 $year =substr($without,0, 4);
 $month =substr($without,4, 2);
 $day =substr($without,6, 2);
-$sql = "Select r.id, DATE_FORMAT(r.date,'%d-%m-%Y') as date, DATE_FORMAT(r.date,'%h:%i:00') as time,
+$sql = "Select r.id as raceID, DATE_FORMAT(r.date,'%d-%m-%Y') as date, DATE_FORMAT(r.date,'%h:%i:00') as time,
  r1.name as r1, r2.name as r2 from races as r, rats as r1, rats as r2 where (r1.id = r.participant1) 
  and (r2.id = r.participant2) and EXTRACT(DAY from r.date) = '".$day."' and EXTRACT(MONTH from r.date) = '".$month."' and EXTRACT(YEAR from r.date) = '"
 .$year ."';";
@@ -37,7 +37,7 @@ $index = 1;
 $races = $conn->query($sql);
 		if ($races != null) {
 		if($races->num_rows > 0){
-		echo"<table class='tabel'>
+		echo"<table id = 'dataTable' class='tabel'>
 							<thead>
 								<th>Crt</th>
 								<th>Date</th>
@@ -49,7 +49,8 @@ $races = $conn->query($sql);
 						";
 			 while($row = $races->fetch_assoc()) {
 				echo "<tr><td>";
-				echo $index;
+				echo "<a href='raceDetails.html?raceID=".strval($row["raceID"])."'>";
+				echo $index .".";
 				echo "</td>";
 				
   				echo "<td>";

@@ -1,4 +1,9 @@
 alter table comentaries modify column ID int AUTO_INCREMENT;
 alter table comentaries modify column commentary VARCHAR(1000);
-insert into comentaries (raceID,userID,commentary) values('1','1','It will be the best race ever!! I really can not wait for it.');
-insert into comentaries (raceID,userID,commentary) values('1','2','I think it will be a draw.');
+alter table comentaries add date DATETIME;
+insert into comentaries (raceID,userID,commentary,date) values('1','1','It will be the best race ever!! I really can not wait for it.', '2015-11-17 12:45:34');
+insert into comentaries (raceID,userID,commentary,date) values('1','2','I think it will be a draw.', '2015-12-16 12:33:34');
+insert into comentaries (raceID,userID,commentary,date) values('2','2','Rat1 is the best.', '2015-12-16 12:33:34');
+alter table users add role VARCHAR(20);
+insert into users (firstName,lastName, birthdate,email,userName,password,safetyWord, role) values ('admin', 'admin', '2015-05-05','oana.nechiforescu@gmail.com','admin', 'admin', 'admin', 'admin');
+insert into users (firstName,lastName, birthdate,email,userName,password,safetyWord, role) values ('Oana', 'Nechiforescu', '1991-05-12','oana.nechiforescu@gmail.com','nyoany', '123', 'safetyword', 'user');

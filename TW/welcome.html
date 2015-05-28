@@ -1,0 +1,24 @@
+<?php
+$cookie_name="username";
+$cookie_value = $_POST["username"];
+setCookie($cookie_name, $cookie_value,0, "/");
+?>
+
+<!DOCTYPE html>
+<html>
+
+<?php 
+require 'dbUtils.php';
+$db = new DBUtils();
+$result = $db->verifyUserExists($_POST["username"], $_POST["password"]);
+if($result=== null){
+header ('Location:http://localhost/twsurse/TW/login.html?error=true');
+return;
+}
+if($result === "admin"){
+header ('Location:http://localhost/twsurse/TW/AdminPage.html');
+return;
+}
+header ('Location:http://localhost/twsurse/TW/CurentUser.html');
+?>
+</html> 

@@ -13,6 +13,17 @@
 .panel {
 	height:300px;
 }
+#commentsSection{
+width:540px;
+height:250px;
+overflow:scroll;
+border:2px;
+margin:5px;
+}
+.container{
+background: #dddddd;
+border:2px solid;
+}
 
 th {
     background-color: #E9E9E9;
