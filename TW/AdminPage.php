@@ -54,7 +54,7 @@ class DbAdminPage{
 				echo "</td>";
 				
   				echo "<td>";
-				echo "<a href='UpdateRace.html?raceID=".strval($row["id"])."'>";
+				echo "<a href='UpdateRace.html?raceID=".strval($row['id'])."&date=".strval($row['date'])."&time=".strval($row['time'])."'>";
 	            echo $row["date"];
 				echo "</td>";
 				
@@ -70,6 +70,15 @@ class DbAdminPage{
 		}
 		
 		$conn->close();
+	}
+	
+	function recreateURL(){
+		$url="";
+		if(isset($_POST['submitedButton'])){			
+			$url="http://localhost/twSurse/TW/AdminPage.html";
+			header("location:".$url,  true, 303);
+		}
+		return $url;
 	}
 }
 ?>

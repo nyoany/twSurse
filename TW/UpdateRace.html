@@ -8,8 +8,10 @@
 </head>
 
 <?php
-	require 'UpdateRace.php';
-	$db =  new DbUpdateRace();
+	require 'UpdatingRace.php';
+	$update =  new DbUpdatingRace();
+	
+
 ?>
 
 <body>
@@ -26,32 +28,37 @@
 		
 		<div id="adminUser">
 			<div class="divLeft"">
-				<form action="add race.html">
+				<form action="<?php $update->recreateURL();?>" method="POST">
 					<fieldset class="fieldSetClass">
 						<legend>Update Race</legend>
 						<div class="divLeft">
 							<span id="participants">Participants</span>
 							<br><br>1:
-							<?php echo "<input list='participant1' value='".$db->getParticipants("participant1")."' disabled='true'>";?>
+							<?php 
+								require 'UpdateRace.php';
+								$autoPopulate = new DbUpdateRace();
+								echo "<input list='participant1' value='".$autoPopulate->getParticipants("participant1")."' disabled='true'>";?>
 							<datalist id="participant1">
 							</datalist>
 							<br><br>2:
-							<?php echo "<input list='participant2' value='".$db->getParticipants("participant2")."' disabled='true'>";?>
+							<?php echo "<input list='participant2' value='".$autoPopulate->getParticipants("participant2")."' disabled='true'>";?>
 							<datalist id="participant2">
 							</datalist>
 							<br><br>
 							<span id="Date">Date</span>
-							<input type="date">
+							<?php echo "<input type='date' name='date' value='".date('Y-m-d',strtotime($_GET['date']))."'>";?>
+							<br><br>
+							<input type="submit" value="Update Race" name="submitedButton" class="generalButton">
 						</div>
 						<div class="divRight">
 							<span id="cota">Cota</span>
 							<br><br>
-							<?php echo "<input type='text' value='".$db->getCota("participant1")."' disabled='true'>";?>
+							<?php echo "<input type='text' value='".$autoPopulate->getCota("cota1")."' disabled='true'>";?>
 							<br><br>
-							<?php echo "<input type='text' value='".$db->getCota("participant2")."' disabled='true'>";?>
+							<?php echo "<input type='text' value='".$autoPopulate->getCota("cota2")."' disabled='true'>";?>
 							<br><br>
 							<span id="Time">Time</span>
-							<input type="time">
+							<?php echo "<input type='time' name='time' value='".$_GET['time']."'>";?>
 						</div>
 					</fieldset>
 				</form> 
@@ -69,7 +76,7 @@
 							<thead>
 							<tbody>
 								<?php
-									$result = $db->getActiveRaces();
+									$result = $autoPopulate->getActiveRaces();
 								?>
 							</tbody>
 						</table>

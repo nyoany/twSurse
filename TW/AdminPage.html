@@ -13,6 +13,8 @@
 require "AddRace.php";
 $addNewRace = new DbAddRace();
 $addNewRace->addRace();
+require 'AdminPage.php';
+$db =  new DbAdminPage();
 
 ?>
 
@@ -28,17 +30,15 @@ $addNewRace->addRace();
 		
 		<div id="adminUser">
 			<div class="divLeft"">
-				<form action="AdminPage.html" method="POST">
+				<form action="<?php $db->recreateURL(); ?>" method="POST">
 					<fieldset class="fieldSetClass">
 						<legend>Add New Race</legend>
 						<div class="divLeft">
 							<span id="participants">Participants</span>
 							<br><br>1:
-							<input list="participant1" name="participant1">
+							<input list="participant1" name="participant1" value="">
 							<datalist id="participant1">
 								<?php
-									require 'AdminPage.php';
-									$db =  new DbAdminPage();
 									$result = $db->getParticipants();
 									foreach ($result as $participant)
 									{
@@ -61,7 +61,7 @@ $addNewRace->addRace();
 							<span id="Date">Date</span>
 							<input type="date" name="date">
 							<br><br>
-							<input type="submit" value="Add Race" class="generalButton">
+							<input type="submit" value="Add Race" name="submitedButton" class="generalButton">
 						</div>
 						<div class="divRight">
 							<span id="cota">Cota</span>
