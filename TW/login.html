@@ -5,9 +5,25 @@
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
   <script>
-  $(function() {
+  
+	if(getQueryVariable("error").toString() ==="true"){
+    $(function() {
     $( "#infoDialog" ).dialog();
   });
+  }
+  
+function getQueryVariable(variable)
+{
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return false;
+}
+  
+  
   </script>
   </head>
 
