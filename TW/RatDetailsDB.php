@@ -7,7 +7,7 @@ function getRatName()
 $result;
 $servername = "localhost";
 $dbusername = "root";
-$dbpassword = "root";
+$dbpassword = "";
 $dbname = "dball";
 // Create connection
 $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
@@ -35,7 +35,7 @@ function getRatWins()
 $result;
 $servername = "localhost";
 $dbusername = "root";
-$dbpassword = "root";
+$dbpassword = "";
 $dbname = "dball";
 // Create connection
 $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
@@ -61,7 +61,7 @@ function getRatLoses()
 	$result;
 $servername = "localhost";
 $dbusername = "root";
-$dbpassword = "root";
+$dbpassword = "";
 $dbname = "dball";
 // Create connection
 $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
@@ -70,12 +70,12 @@ $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 if ($conn->connect_error) {
     die("Connection to database failed: " . $conn->connect_error);
 }
-$inter="select loses from rats; ";
+$inter="select losses from rats where name = '" .$_GET['RatName'] ."';" ;
  
 $ratloses=$conn->query($inter);
 if($ratloses->num_rows>0){
 	while($row=$ratloses->fetch_assoc()){
-		$result=$row["loses"];
+		$result=$row["losses"];
 	}
 }  
 $conn->close();
@@ -87,7 +87,7 @@ function getCota()
 	$result;
 $servername = "localhost";
 $dbusername = "root";
-$dbpassword = "root";
+$dbpassword = "";
 $dbname = "dball";
 // Create connection
 $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
@@ -107,14 +107,13 @@ if($ratcota->num_rows>0){
 $conn->close();
 return $result;
 }
-/*
 
-function get()
+function getAmount()
 {
 	$result;
 $servername = "localhost";
 $dbusername = "root";
-$dbpassword = "root";
+$dbpassword = "";
 $dbname = "dball";
 // Create connection
 $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
@@ -123,17 +122,18 @@ $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 if ($conn->connect_error) {
     die("Connection to database failed: " . $conn->connect_error);
 }
-$inter="select cota from rats; ";
+$inter="insert into bets ('user_id', 'race_id', 'amount') values ('" .$_COOKIE['UserName'] .",". $_POST['RaceId'] .");";
  
-$ratcota=$conn->query($inter);
-if($ratcota->num_rows>0){
+$ratamount=$conn->query($inter);
+if($ratamount->num_rows>0){
 	while($row=$ratcota->fetch_assoc()){
-		$result=$row["cota"];
+		$result=$row["Amount"];
 	}
 }  
 $conn->close();
 return $result;
+
+
 }
-*/
 } 
 ?>

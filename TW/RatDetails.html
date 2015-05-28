@@ -27,9 +27,9 @@ $rd=new RatDetails();
 					
 <div class="divLeft">						
 <br>Rat Name: 
-<?php
-echo $rd->getRatName();
-?>
+<?php 
+echo $_GET['RatName'];
+ ?>
 <br>
 <br>Wins: <?php
 echo $rd->getRatWins();
@@ -44,15 +44,27 @@ echo $rd->getCota();
 ?>" disabled="true"></input>
 </div>
 <div class="divRight">
-<br>Data
-<input type="date" name="data" disabled="true"></input>
+<br>Date
+<input type="text" name="data"  value="<?php 
+echo str_replace('-','/',$_GET['Date']);
+ ?>" disabled="true"></input>
 <br>
 <br>Time
-<input type="time" name="data" disabled="true"></input>
+<input type="time" name="data" value="<?php 
+echo $_GET['Time'];
+?>" disabled="true"></input>
 <br>
-<br>Amount <input class= "decimal" type="number" step="any"> </input>
+
+ 
+ 
+ <form action="RatDetails.php" method="POST">
+ <br>Amount <input class= "decimal" type="number" step="any"> </input>
  <br><br>
-<input id="submitBet" type="submit" value="submitBet">
+ <input id="submitBet" type="submit"/>
+ <input type ="text" style="display: none;" name='RaceId' value= 'RaceId' 
+ <?php
+?>
+
 </div>
 </fieldset>
 </form>
@@ -62,7 +74,7 @@ echo $rd->getCota();
 				
 					<fieldset class="fieldSetClass">
 						<legend>Attended Races:</legend>
-						<table class="tabel">
+						  <table class="tabel">
 							<thead>
 								<th>Crt</th>
 								<th>Date</th>
