@@ -18,7 +18,7 @@ th {text-align: left;}
 <body>
 
 <?php
-if(isset($_GET['q'])){
+if(isset($_GET['q']) ){
 $q = $_GET['q'];
 $conn = mysqli_connect('localhost','root','root','dball');
 if (!$conn) {
@@ -49,7 +49,7 @@ $races = $conn->query($sql);
 						";
 			 while($row = $races->fetch_assoc()) {
 				echo "<tr><td>";
-				echo "<a href='raceDetails.html?raceID=".strval($row["raceID"])."'>";
+				echo "<a href='raceDetails.html?raceID=".strval($row["raceID"]). "&sessionID=".$_GET['sessionID']."'>";
 				echo $index .".";
 				echo "</td>";
 				
@@ -62,12 +62,12 @@ $races = $conn->query($sql);
 				echo "</td>";				
 				
   				echo "<td>";
-				echo "<a href='RatDetails.html?RatName=".strval($row["r1"])."&Date=".strval($row["date"])."&Time=".strval($row["time"]) ."'>";
+				echo "<a href='RatDetails.html?RatName=".strval($row["r1"])."&Date=".strval($row["date"])."&Time=".strval($row["time"])."&sessionID=".$_GET['sessionID']."'>";
 	            echo $row["r1"];
 				echo "</td>";
 				
 				echo "<td>";
-				echo "<a href='RatDetails.html?RatName=".strval($row["r2"])."&Date=".strval($row["date"])."&Time=".strval($row["time"]) ."'>";
+				echo "<a href='RatDetails.html?RatName=".strval($row["r2"])."&Date=".strval($row["date"])."&Time=".strval($row["time"])."&sessionID=".$_GET['sessionID']."'>";
 	            echo $row["r2"];
 				echo "</td></tr>";
 				$index = $index + 1;

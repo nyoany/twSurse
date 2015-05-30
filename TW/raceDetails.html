@@ -5,7 +5,7 @@
   <title>Race Details</title>
   <link rel="stylesheet" type="text/css" href="AdminPage.css">
   <link rel="stylesheet" type="text/css" href="template.css">
- <script type="text/javascript">
+ <script>
 
 function logOut(){
   <?php
@@ -16,24 +16,27 @@ function logOut(){
   ?>
  }
 
-function verifyErrorFree(checkbox){
-if(document.getElementByID("firstC").checked){
-if(document.getElementByID("secondC").checked){
-alert("You can not bet on two rats. Pick one.");
-/*document.getElementByID('infoDialog').style = "display:block;";
+function verifyErrorFree(){
+if(document.getElementByID("rat1").checked == true){
+alert("checked1");
+if(document.getElementByID("rat2").checked){
+alert("dont");
+document.getElementByID("infoDialog").style = "display:block;";
 $(function() {
     $( "#infoDialog" ).dialog();
   });
 }
-*/
-
 }
-}}
+}
 </script>
 </head>
 
 <body>
-
+<div id="infoDialog" title="Information" style="display:none;">
+<p>
+You can not bet on two rats. Pick just one.
+</p>
+</div>
 <?php
 require "raceDetails.php";
 $raceDetails = new RaceDetails();
@@ -68,9 +71,9 @@ $raceDetails = new RaceDetails();
 		<legend>Bet on a rat from this race:</legend>
 		<b><i>You have time until <?php echo $raceDetails->getAvailableTime();?> to bet.</i></b>
 		<form action="bet.php" method="POST" onsubmit = "verifyErrorFree()"> 
-			<?php
-							echo $raceDetails->getBetSection();
-							?>
+		<br> <b>Select rat : </b> 
+		<input type = "checkbox" id="rat1" name = "r1" value="r1" onclick = "verifyErrorFree()"><?php echo $raceDetails->getBetSectionR1();?>
+		<input type = "checkbox" id="rat2" name = "r2" value="r2" onclick = "verifyErrorFree()"><?php echo $raceDetails->getBetSectionR2();?>
 							<br><br>
 		<b>Amount: </b><input type="text" name="amount" value="0">
 		<br><br>
@@ -81,7 +84,7 @@ $raceDetails = new RaceDetails();
 		</div>
 		
 			<div class="divRight"">
-				<form action="raceDetails.html?raceID=<?php echo $raceDetails->getCurrentRaceID(); ?>" method = "POST">
+				<form action="raceDetails.html?raceID=<?php echo $raceDetails->getCurrentRaceID(); ?>&sessionID=<?php echo $_GET['sessionID']?>" method = "POST">
 					<fieldset class="fieldSetClass">
 						<legend>Comments:</legend>
 						<br>

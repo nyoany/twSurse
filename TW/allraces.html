@@ -17,7 +17,7 @@ function logOut(){
  }
  */
  
-function loadData(str) {
+function loadData(str, sessionID) {
     if (str == "") {
         document.getElementById("txtHint").innerHTML = "";
         return;
@@ -34,7 +34,7 @@ function loadData(str) {
                 document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET","allRaces.php?q="+str,true);
+        xmlhttp.open("GET","allRaces.php?sessionID=" +sessionID + "&q="+str,true);
         xmlhttp.send();
 		
     }
@@ -68,7 +68,7 @@ require "comments.php";
 						<legend>Past/Future Races</legend>
 		                     <br><br>
 							<span id="participants">Select date: </span>
-							<input id ="dateAsync" type="date" name="date" onchange = "loadData(this.value)">
+							<input id ="dateAsync" type="date" name="date" onchange = "loadData(this.value, <?php echo $_GET['sessionID']?>)">
 							<br><br>
 							<div id="txtHint"><b>No data to display...</b>
 							
