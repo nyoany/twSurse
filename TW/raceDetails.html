@@ -5,9 +5,35 @@
   <title>Race Details</title>
   <link rel="stylesheet" type="text/css" href="AdminPage.css">
   <link rel="stylesheet" type="text/css" href="template.css">
+ <script type="text/javascript">
+
+function logOut(){
+  <?php
+  if(isset($_COOKIE["username"])){
+  unset($_COOKIE["username"]);
+  setCookie("username", "", time()-3600, "/","localhost");
+  }
+  ?>
+ }
+
+function verifyErrorFree(checkbox){
+if(document.getElementByID("firstC").checked){
+if(document.getElementByID("secondC").checked){
+alert("You can not bet on two rats. Pick one.");
+/*document.getElementByID('infoDialog').style = "display:block;";
+$(function() {
+    $( "#infoDialog" ).dialog();
+  });
+}
+*/
+
+}
+}}
+</script>
 </head>
 
 <body>
+
 <?php
 require "raceDetails.php";
 $raceDetails = new RaceDetails();
@@ -21,7 +47,9 @@ $raceDetails = new RaceDetails();
 				</a>
 			</div>
 			<div id="rightHeader">
-				<input type="submit" value="Logout" class="generalButton"/>
+					<a href="http://localhost/twsurse/TW/Login.html" style="text-decoration:none;">
+				<input type="button" value="Logout" class="generalButton" onClick ="logOut()">
+				</a>
 			</div>
 		</div>
 		
@@ -34,6 +62,20 @@ $raceDetails = new RaceDetails();
 							echo $raceDetails->getDetails();
 							?>
 		
+		</fieldset>
+			<fieldset class="fieldSetClass" style="display:<?php echo $raceDetails->getWinner();?>">
+		<br>
+		<legend>Bet on a rat from this race:</legend>
+		<b><i>You have time until <?php echo $raceDetails->getAvailableTime();?> to bet.</i></b>
+		<form action="bet.php" method="POST" onsubmit = "verifyErrorFree()"> 
+			<?php
+							echo $raceDetails->getBetSection();
+							?>
+							<br><br>
+		<b>Amount: </b><input type="text" name="amount" value="0">
+		<br><br>
+		<input type="submit" value="Bet" class="generalButton">
+		</form>
 		</fieldset>
 		
 		</div>
@@ -48,7 +90,7 @@ $raceDetails = new RaceDetails();
 					   <textarea rows="4" cols = "50" name ="comment"></textarea> 
 						<br><br>
 						<input type="text" value = "<?php echo $raceDetails->getCurrentRaceID(); ?>" name="raceID" style="display:none;">
-						<input type="submit" name= "Comment"/>
+						<input type="submit" value= "Comment" class="generalButton"/>
 						<br><br>
 						<div class="container">
 						<div id="commentsSection">

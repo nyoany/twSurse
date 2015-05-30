@@ -1,7 +1,7 @@
 <?php
 $cookie_name="username";
 $cookie_value = $_POST["username"];
-setCookie($cookie_name, $cookie_value,0, "/");
+setCookie($cookie_name, $cookie_value,0, "/", "");
 ?>
 
 <!DOCTYPE html>
@@ -15,10 +15,11 @@ if($result=== null){
 header ('Location:http://localhost/twsurse/TW/login.html?error=true');
 return;
 }
+$sessionID = $db->updateSessionId($_POST["username"], $_POST["password"]);
 if($result === "admin"){
 header ('Location:http://localhost/twsurse/TW/AdminPage.html');
 return;
 }
-header ('Location:http://localhost/twsurse/TW/CurentUser.html');
+header ('Location:http://localhost/twsurse/TW/CurentUser.html?sessionID='.$sessionID);
 ?>
 </html> 

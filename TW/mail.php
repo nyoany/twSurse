@@ -1,12 +1,16 @@
 <?php
-
-
+$result;
+require 'dbUtils.php';
+$db = new dbUtils();
+$password = $db->verifyUserIsValid($_POST["username"],$_POST["securityword"],$_POST["email"]);
+if($password==null){
+header ('Location:http://localhost/twsurse/TW/login.html?error=true');
+return;
+}
 $result = mail(
      $_POST["email"],
-     'New generated password for Ratsie Race site',
-     'A new password has been generated for you :'.  $_POST["securityword"].'123');
+     'Your forgotten password from Ratsie Race site',
+     'Your password is : '.$password);
 	 
-	 if($result){
-	 
-	 }
+header ('Location:http://localhost/twsurse/TW/login.html');
 ?>
