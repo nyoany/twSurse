@@ -17,14 +17,10 @@ function logOut(){
  }
 
 function verifyErrorFree(){
-if(document.getElementByID("rat1").checked == true){
-alert("checked1");
-if(document.getElementByID("rat2").checked){
-alert("dont");
-document.getElementByID("infoDialog").style = "display:block;";
-$(function() {
-    $( "#infoDialog" ).dialog();
-  });
+
+if(document.getElementById("first").checked){
+if(document.getElementById("second").checked){
+alert("You can not bet on two rats. Pick just one.");
 }
 }
 }
@@ -32,11 +28,6 @@ $(function() {
 </head>
 
 <body>
-<div id="infoDialog" title="Information" style="display:none;">
-<p>
-You can not bet on two rats. Pick just one.
-</p>
-</div>
 <?php
 require "raceDetails.php";
 $raceDetails = new RaceDetails();
@@ -45,7 +36,7 @@ $raceDetails = new RaceDetails();
 		<div id="headerBar">
 			<div id="leftHeader">
 				<span id="page-title"><H1>Race Details:</H1></span>
-				<a href="http://localhost/twsurse/TW/allraces.html">
+				<a href="http://localhost/twsurse/TW/allraces.html?sessionID=<?php echo $_GET['sessionID']?>">
 				<input type="button" value="Back" class="generalButton"></input>
 				</a>
 			</div>
@@ -72,8 +63,8 @@ $raceDetails = new RaceDetails();
 		<b><i>You have time until <?php echo $raceDetails->getAvailableTime();?> to bet.</i></b>
 		<form action="bet.php" method="POST" onsubmit = "verifyErrorFree()"> 
 		<br> <b>Select rat : </b> 
-		<input type = "checkbox" id="rat1" name = "r1" value="r1" onclick = "verifyErrorFree()"><?php echo $raceDetails->getBetSectionR1();?>
-		<input type = "checkbox" id="rat2" name = "r2" value="r2" onclick = "verifyErrorFree()"><?php echo $raceDetails->getBetSectionR2();?>
+		<input type = "checkbox" id="first" name = "r1" value="r1" onclick = "verifyErrorFree()"/><?php echo $raceDetails->getBetSectionR1();?>
+		<input type = "checkbox" id="second" name = "r2" value="r2" onclick = "verifyErrorFree()"/><?php echo $raceDetails->getBetSectionR2();?>
 							<br><br>
 		<b>Amount: </b><input type="text" name="amount" value="0">
 		<br><br>
