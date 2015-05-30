@@ -52,7 +52,7 @@ class DbAddRace{
 	
 	function addRace(){
 		if(isset($_POST['submitedButton'])){
-		//echo "<script>alert('".$_POST['date']." ".$_POST["time"].":00"."');</script>";
+		echo "<script>alert('".$_POST['participant1']." ".$_POST['participant2']."');</script>";
 
 		$this->insertRace($_POST['date']." ".$_POST['time'],$_POST['participant1'], $_POST['participant2'], $_POST['cota1'], $_POST['cota2']);
 		}

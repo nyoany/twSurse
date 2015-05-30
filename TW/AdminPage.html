@@ -56,7 +56,7 @@ $db =  new DbAdminPage();
 						<div class="divLeft">
 							<span id="participants">Participants</span>
 							<br><br>1:
-							<select id="participant1" onchange="show(this.value, 'participant2')">
+							<select id="participant1" name="participant1" onchange="show(this.value, 'participant2')">
 								<?php 
 									$result = $db->getParticipants();
 									echo "<option>"." "."</option>";
@@ -67,7 +67,7 @@ $db =  new DbAdminPage();
 								?>
 							</select>
 							<br><br>2:
-							<select id="participant2">
+							<select id="participant2" name="participant2">
 								<?php 
 									$result = $db->getParticipants();
 									echo "<option>"." "."</option>";

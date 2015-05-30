@@ -33,6 +33,14 @@ body {
 	float:right;
 }
 
+#participant1 {
+width: 80%; 
+}
+
+#participant2 {
+width: 80%; 
+}
+
 .fieldSetClass{
  margin: 100px;
  width: auto;
