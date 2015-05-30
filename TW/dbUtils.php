@@ -54,21 +54,41 @@ $queryr = $conn->query($sql);
 if ($queryr->num_rows > 0) {
 while($row = $queryr->fetch_assoc()) {
 if($row["role"] === "admin"){
-return "admin";
+$result = "admin";
 }
 else if($row["role"]==="user"){
-return "user";
-}
-}
+$result = "user";
 }
 else{
 $result = null;
 }
+}
+}
 return $result;
 }
 
+function updateSessionId($username, $password){
 
-function verifyUserIsValid($username, $password, $safetyword, $email){
+$servername = "localhost";
+$dbusername = "root";
+$dbpassword = "root";
+$dbname = "dball";
+// Create connection
+$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection to database failed: " . $conn->connect_error);
+}
+
+$sessionID = rand();
+$loggedinQ ="update users set sessionID = ".$sessionID." where username = '" .$username ."' and password = '" . $password ."';";
+$conn->query($loggedinQ);
+return $sessionID;
+}
+
+
+function verifyUserIsValid($username,$safetyword, $email){
 $result;
 $servername = "localhost";
 $dbusername = "root";
@@ -82,14 +102,15 @@ if ($conn->connect_error) {
     die("Connection to database failed: " . $conn->connect_error);
 }
 
-$sql ="select * from users where username = '" .$username ."' and password = '" . $password . "' and safetyword = '" .$safetyword ."' and email = '" .$email
-."';";
+$sql ="select password from users where username = '" .$username ."' and safetyword = '" .$safetyword ."' and email = '" .$email."';";
 $queryr = $conn->query($sql);
 if ($queryr->num_rows > 0) {
-$result = "valid";
+while($row = $queryr->fetch_assoc()) {
+$result = $row["password"];
+}
 }
 else{
-$result = "";
+$result = null;
 }
 return $result;
 

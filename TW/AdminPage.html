@@ -29,6 +29,7 @@
 <body>
 
 <?php
+echo session_id();
 require "AddRace.php";
 $addNewRace = new DbAddRace();
 $addNewRace->addRace();

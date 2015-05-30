@@ -5,5 +5,6 @@ insert into comentaries (raceID,userID,commentary,date) values('1','1','It will 
 insert into comentaries (raceID,userID,commentary,date) values('1','2','I think it will be a draw.', '2015-12-16 12:33:34');
 insert into comentaries (raceID,userID,commentary,date) values('2','2','Rat1 is the best.', '2015-12-16 12:33:34');
 alter table users add role VARCHAR(20);
+alter table users add sessionID VARCHAR(20);
 insert into users (firstName,lastName, birthdate,email,userName,password,safetyWord, role) values ('admin', 'admin', '2015-05-05','oana.nechiforescu@gmail.com','admin', 'admin', 'admin', 'admin');
 insert into users (firstName,lastName, birthdate,email,userName,password,safetyWord, role) values ('Oana', 'Nechiforescu', '1991-05-12','oana.nechiforescu@gmail.com','nyoany', '123', 'safetyword', 'user');
