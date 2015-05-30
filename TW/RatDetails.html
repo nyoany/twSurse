@@ -39,31 +39,7 @@ echo $rd->getRatWins();
 echo $rd->getRatLoses();
 ?>
 <br>
-<br>Cota: <input  class= "decimal" type="text" value="<?php
-echo $rd->getCota();
-?>" disabled="true"></input>
-</div>
-<div class="divRight">
-<br>Date
-<input type="text" name="data"  value="<?php 
-echo str_replace('-','/',$_GET['Date']);
- ?>" disabled="true"></input>
-<br>
-<br>Time
-<input type="time" name="data" value="<?php 
-echo $_GET['Time'];
-?>" disabled="true"></input>
-<br>
 
- 
- 
- <form action="RatDetails.php" method="POST">
- <br>Amount <input class= "decimal" type="number" step="any"> </input>
- <br><br>
- <input id="submitBet" type="submit"/>
- <input type ="text" style="display: none;" name='RaceId' value= 'RaceId' 
- <?php
-?>
 
 </div>
 </fieldset>
@@ -79,15 +55,12 @@ echo $_GET['Time'];
 								<th>Crt</th>
 								<th>Date</th>
 								<th>Time</th>
-								<th>Status</th>
+								<th>Amount Bet</th>
+								<th>Earned Money</th>
 							<thead>
 							<tbody>
-								<tr>
-									<td>ceva</td>
-									<td>ceva</td>
-									<td>ceva</td>
-									<td>ceva</td>
-								</tr>
+								
+				
 							</tbody>
 						</table>
 					</fieldset>

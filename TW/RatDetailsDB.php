@@ -7,7 +7,7 @@ function getRatName()
 $result;
 $servername = "localhost";
 $dbusername = "root";
-$dbpassword = "";
+$dbpassword = "root";
 $dbname = "dball";
 // Create connection
 $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
@@ -35,7 +35,7 @@ function getRatWins()
 $result;
 $servername = "localhost";
 $dbusername = "root";
-$dbpassword = "";
+$dbpassword = "root";
 $dbname = "dball";
 // Create connection
 $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
@@ -61,7 +61,7 @@ function getRatLoses()
 	$result;
 $servername = "localhost";
 $dbusername = "root";
-$dbpassword = "";
+$dbpassword = "root";
 $dbname = "dball";
 // Create connection
 $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
@@ -82,58 +82,49 @@ $conn->close();
 return $result;
 }
 
-function getCota()
-{
-	$result;
-$servername = "localhost";
-$dbusername = "root";
-$dbpassword = "";
-$dbname = "dball";
-// Create connection
-$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection to database failed: " . $conn->connect_error);
-}
-$inter="select cota from rats; ";
- 
-$ratcota=$conn->query($inter);
-if($ratcota->num_rows>0){
-	while($row=$ratcota->fetch_assoc()){
-		$result=$row["cota"];
+
+	function getAttendRaces(){
+		$index = 1;
+		$servername = "localhost";
+		$dbusername = "root";
+		$dbpassword = "root";
+		$dbname = "dball";
+		// Create connection
+		$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+
+		// Check connection
+		if ($conn->connect_error) {
+			die("Connection to database failed: " . $conn->connect_error);
+		}
+		
+		/*$sql = "Select r.id, DATE_FORMAT(r.date,'%d-%m-%Y') as date, DATE_FORMAT(r.date,'%h:%i:00') as time,
+		*/
+		$positions = $conn->query($sql);
+		if ($positions->num_rows > 0) {
+			 while($row = $positions->fetch_assoc()) {
+				echo "<tr><td>";
+				echo $index;
+				echo "</td>";
+				
+  				echo "<td>";
+				echo "<a href='UpdateRace.html?raceID=".strval($row["id"])."'>";
+	            echo $row["date"];
+				echo "</td>";
+				
+  				echo "<td>";
+	            echo $row["time"];
+				echo "</td>";				
+				
+  				echo "<td>";
+	            echo $row["r1"]." - ".$row["r2"];
+				echo "</td></tr>";
+				$index = $index + 1;
+			 }
+		}
+		
+		$conn->close();
 	}
-}  
-$conn->close();
-return $result;
-}
 
-function getAmount()
-{
-	$result;
-$servername = "localhost";
-$dbusername = "root";
-$dbpassword = "";
-$dbname = "dball";
-// Create connection
-$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection to database failed: " . $conn->connect_error);
-}
-$inter="insert into bets ('user_id', 'race_id', 'amount') values ('" .$_COOKIE['UserName'] .",". $_POST['RaceId'] .");";
- 
-$ratamount=$conn->query($inter);
-if($ratamount->num_rows>0){
-	while($row=$ratcota->fetch_assoc()){
-		$result=$row["Amount"];
-	}
-}  
-$conn->close();
-return $result;
-
-
-}
 } 
 ?>
