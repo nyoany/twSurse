@@ -36,7 +36,7 @@ $userIDQ= $conn->query($getUserID);
 if ($userIDQ->num_rows > 0) {
 while($row = $userIDQ->fetch_assoc()) {
 $userID = strval($row["id"]);
-if(isset($_POST["comment"])){
+if(isset($_POST["submit"])){
 $insertComm = "INSERT INTO comentaries (raceID, userID, commentary, date) VALUES ('".$_POST['raceID'] ."','". $userID."','" .$_POST['comment']."',NOW());";
 $conn->query($insertComm);
 }}}
@@ -57,7 +57,8 @@ while($username = $usernameF->fetch_assoc()){
 $result = $result ."<br><b>" .$username["username"] . " commented on " .$row["date"]. " : </b>" .$row["commentary"] . ".<br>";
 }
 }
-}}
+}
+}
 return $result;
 }
 

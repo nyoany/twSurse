@@ -21,8 +21,17 @@ function verifyErrorFree(){
 if(document.getElementById("first").checked){
 if(document.getElementById("second").checked){
 alert("You can not bet on two rats. Pick just one.");
+return false;
 }
 }
+return true;
+}
+
+function verifyNotSubmitted(){
+if(document.getElementById("commentsTxt").value != ""){
+return true;
+}
+return false;
 }
 </script>
 </head>
@@ -61,7 +70,7 @@ $raceDetails = new RaceDetails();
 		<br>
 		<legend>Bet on a rat from this race:</legend>
 		<b><i>You have time until <?php echo $raceDetails->getAvailableTime();?> to bet.</i></b>
-		<form action="bet.php" method="POST" onsubmit = "verifyErrorFree()"> 
+		<form action="bet.html?raceID=<?php echo $raceDetails->getCurrentRaceID(); ?>&sessionID=<?php echo $_GET['sessionID']?>" method="POST" onsubmit = "return verifyErrorFree()"> 
 		<br> <b>Select rat : </b> 
 		<input type = "checkbox" id="first" name = "r1" value="r1" onclick = "verifyErrorFree()"/><?php echo $raceDetails->getBetSectionR1();?>
 		<input type = "checkbox" id="second" name = "r2" value="r2" onclick = "verifyErrorFree()"/><?php echo $raceDetails->getBetSectionR2();?>
@@ -75,16 +84,16 @@ $raceDetails = new RaceDetails();
 		</div>
 		
 			<div class="divRight"">
-				<form action="raceDetails.html?raceID=<?php echo $raceDetails->getCurrentRaceID(); ?>&sessionID=<?php echo $_GET['sessionID']?>" method = "POST">
+				<form action="raceDetails.html?raceID=<?php echo $raceDetails->getCurrentRaceID(); ?>&sessionID=<?php echo $_GET['sessionID']?>" onsubmit = "return verifyNotSubmitted()" method = "POST">
 					<fieldset class="fieldSetClass">
 						<legend>Comments:</legend>
 						<br>
 						<b>Add your comments: </b>
 						<br>
-					   <textarea rows="4" cols = "50" name ="comment"></textarea> 
+					   <textarea id ="commentsTxt" rows="4" cols = "50" name ="comment" value = ""></textarea> 
 						<br><br>
 						<input type="text" value = "<?php echo $raceDetails->getCurrentRaceID(); ?>" name="raceID" style="display:none;">
-						<input type="submit" value= "Comment" class="generalButton"/>
+						<input type="submit" value= "Comment" name="submit" class="generalButton"/>
 						<br><br>
 						<div class="container">
 						<div id="commentsSection">
