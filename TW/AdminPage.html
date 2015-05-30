@@ -2,9 +2,28 @@
 <html>
 
 <head>
-  <title>Admin Page</title>
-  <link rel="stylesheet" type="text/css" href="AdminPage.css">
-  <link rel="stylesheet" type="text/css" href="template.css">
+	<title>Admin Page</title>
+	<link rel="stylesheet" type="text/css" href="AdminPage.css">
+	<link rel="stylesheet" type="text/css" href="template.css">
+  
+	<script>
+	function show(str, participant) {			
+		if (str.length == 0) { 
+			document.getElementById(participant).innerHTML = "";
+			return;
+		} else {
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					document.getElementById(participant).innerHTML = xmlhttp.responseText;
+				}
+			}
+			xmlhttp.open("GET", "Rats.php?q=" + str, true);
+			xmlhttp.send();
+		}
+	}
+	</script>
+  
 </head>
 
 <body>
@@ -36,27 +55,27 @@ $db =  new DbAdminPage();
 						<div class="divLeft">
 							<span id="participants">Participants</span>
 							<br><br>1:
-							<input list="participant1" name="participant1" value="">
-							<datalist id="participant1">
-								<?php
+							<select id="participant1" onchange="show(this.value, 'participant2')">
+								<?php 
 									$result = $db->getParticipants();
+									echo "<option>"." "."</option>";
 									foreach ($result as $participant)
-									{
-										echo "<option value='".$participant."'>";
-									}
+										{
+											echo "<option>".$participant."</option>";
+										}
 								?>
-							</datalist>
+							</select>
 							<br><br>2:
-							<input list="participant2" name="participant2">
-							<datalist id="participant2">
-								<?php
+							<select id="participant2">
+								<?php 
 									$result = $db->getParticipants();
+									echo "<option>"." "."</option>";
 									foreach ($result as $participant)
-									{
-										echo "<option value='".$participant."'>";
-									}
+										{
+											echo "<option>".$participant."</option>";
+										}
 								?>
-							</datalist>
+							</select>
 							<br><br>
 							<span id="Date">Date</span>
 							<input type="date" name="date">

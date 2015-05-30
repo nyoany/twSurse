@@ -74,8 +74,12 @@ class DbUpdateRace{
 			die("Connection to database failed: " . $conn->connect_error);
 		}
 		
-		$sql = "Select r.id, DATE_FORMAT(r.date,'%d-%m-%Y') as date, DATE_FORMAT(r.date,'%h-%i-%s') as time, r1.name as r1, r2.name as r2 from races as r, rats as r1, rats as r2 where (date > curdate()) and (r1.id = r.participant1) and (r2.id = r.participant2);";
-
+		$sql = "SELECT u.userName as userName, b.amount as amountBet, r.name as ratName 
+				FROM users u, bets b, rats r 
+				WHERE b.userID = u.id
+				AND b.raceID = ".$_GET['raceID']."
+				AND b.ratID = r.id;";
+		
 		$positions = $conn->query($sql);
 		if ($positions->num_rows > 0) {
 			 while($row = $positions->fetch_assoc()) {
@@ -84,16 +88,15 @@ class DbUpdateRace{
 				echo "</td>";
 				
   				echo "<td>";
-				echo "<a href='UpdateRace.html?raceID=".strval($row["id"])."'>";
-	            echo $row["date"];
+	            echo $row["userName"];
 				echo "</td>";
 				
   				echo "<td>";
-	            echo $row["time"];
+	            echo $row["amountBet"];
 				echo "</td>";				
 				
   				echo "<td>";
-	            echo $row["r1"]." - ".$row["r2"];
+	            echo $row["ratName"];
 				echo "</td></tr>";
 				$index = $index + 1;
 			 }

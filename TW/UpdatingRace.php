@@ -95,7 +95,6 @@ class DbUpdatingRace{
 			
 			$url="http://localhost/twSurse/TW/UpdateRace.html?raceID=".$_GET['raceID']."&date=".strval($this->getDate($_GET['raceID']))."&time=".strval($this->getTime($_GET['raceID']));
 			header("location:".$url,  true, 303);
-			echo "<script>alert('".$url."')</script>";
 		}
 		return $url;
 	}
