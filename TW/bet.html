@@ -1,0 +1,58 @@
+<html>
+<?php
+function getCurrentRaceID(){
+if(isset($_GET['raceID'])){
+return $_GET['raceID'];
+}
+return null;
+}
+function getCurrentSessionID(){
+if(isset($_GET['sessionID'])){
+return $_GET['sessionID'];
+}
+return null;
+}
+
+
+$result = "";
+$servername = "localhost";
+$dbusername = "root";
+$dbpassword = "root";
+$dbname = "dball";
+// Create connection
+$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection to database failed: " . $conn->connect_error);
+}
+$competitor= null;
+$ratId = null;
+if(isset($_POST["r1"])){
+$ratId ="participant1";
+}
+else {
+$ratId = "participant2";
+}
+$ratq = "select ".$ratId." from races where id =".$_GET["raceID"];
+$ratr= $conn->query($ratq);
+if ($ratr->num_rows > 0) {
+while($ratrow = $ratr->fetch_assoc()) {
+
+$competitor = $ratrow[strval($ratId)];
+}}
+$sessionID = $_GET['sessionID'];
+if($sessionID!=null){
+$getUserID ="select id from users where sessionID='".$sessionID."';";
+$userIDQ= $conn->query($getUserID);
+if ($userIDQ->num_rows > 0) {
+while($row = $userIDQ->fetch_assoc()) {
+$userID = $row["id"];
+$insertComm = "INSERT INTO bets (userID, raceID, amount, ratID, earnings) VALUES ('".$userID."','". $_GET["raceID"]."','" .$_POST["amount"]."','". $competitor."',0);";
+echo $insertComm;
+$conn->query($insertComm);
+}
+}
+}
+?>
+<html>
