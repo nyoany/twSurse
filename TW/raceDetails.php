@@ -152,10 +152,16 @@ if($row["winner"] === null){
 $result = $result. "<b>Winner: </b>The race did not start yet.";
 }
 else{
-$result = $result. "<b>Winner : </b>" .$row["winner"]; 
+$ratWinnerq = "select name from rats where id =".$row["winner"].";";
+$winnerR = $conn->query($ratWinnerq);
+
+while($winnerRow = $winnerR->fetch_assoc()) {
+
+$result = $result. "<b>Winner : </b>" .$winnerRow["name"]; 
 }
 }
 return $result;
+}
 }
 
 function getWinner(){

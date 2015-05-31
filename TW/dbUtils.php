@@ -115,5 +115,20 @@ $result = null;
 return $result;
 
 }
+
+function verifyRaceStart(){
+
+$conn = mysqli_connect('localhost','root','root','dball');
+if (!$conn) {
+    die('Could not connect: ' . mysqli_error($conn));
+}
+
+$sql = "Select r.id as raceID, DATE_FORMAT(r.date,'%d-%m-%Y') as date, DATE_FORMAT(r.date,'%h:%i:00') as time,
+ r1.name as r1, r2.name as r2 from races as r, rats as r1, rats as r2 where (r1.id = r.participant1) 
+ and (r2.id = r.participant2) and EXTRACT(DAY from r.date) = '".$day."' and EXTRACT(MONTH from r.date) = '".$month."' and EXTRACT(YEAR from r.date) = '"
+.$year ."';";
+
+}
+
 }
 ?>

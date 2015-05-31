@@ -32,7 +32,6 @@ $sql = "Select r.id as raceID, DATE_FORMAT(r.date,'%d-%m-%Y') as date, DATE_FORM
  r1.name as r1, r2.name as r2 from races as r, rats as r1, rats as r2 where (r1.id = r.participant1) 
  and (r2.id = r.participant2) and EXTRACT(DAY from r.date) = '".$day."' and EXTRACT(MONTH from r.date) = '".$month."' and EXTRACT(YEAR from r.date) = '"
 .$year ."';";
-
 $index = 1;
 $races = $conn->query($sql);
 		if ($races != null) {
