@@ -10,6 +10,19 @@
 	float:right;
 }
 
+.divCurrentF {
+	width: 60%; 
+	max-height: 500px;
+	float:left;
+}
+
+.divCurrentR {
+	width: 40%;
+	max-height: 100px;
+	float:right;
+}
+
+
 .panel {
 	height:300px;
 }

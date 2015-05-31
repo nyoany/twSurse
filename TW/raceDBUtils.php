@@ -18,9 +18,6 @@ if ($conn->connect_error) {
 }
 
 $winnerQ = "Select winner from currentrace;";
-
-
-
 }
 
 function verifyStillRunning(){
@@ -93,10 +90,10 @@ if ($conn->connect_error) {
 }
 $updateW = null;
 if(intval($this->getFirstRatFinalPosition())>=1084){
-$updateW = "update currentrace set winner = 'first', firstratposition = '1084', secondratposition = '" .$this->getSecondRatFinalPosition() ."';";
+$updateW = "update currentrace set status = 'ended', winner = 'first', firstratposition = '1084', secondratposition = '" .$this->getSecondRatFinalPosition() ."';";
 }
 else{
-$updateW = "update currentrace set winner = 'second', secondratposition = '1084', firstratposition = '" .$this->getFirstRatFinalPosition() . "';";
+$updateW = "update currentrace set status = 'ended', winner = 'second', secondratposition = '1084', firstratposition = '" .$this->getFirstRatFinalPosition() . "';";
 }
 
 if ($conn->query($updateW) === TRUE) {

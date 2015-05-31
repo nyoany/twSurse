@@ -46,6 +46,8 @@ function loadData(str, sessionID) {
 <?php
 require "allRaces.php";
 require "comments.php";
+require "CurrentRaceDb.php";
+$currentRace= new CurrentRace();
 ?>
 	<div id="main">
 		<div id="headerBar">
@@ -56,6 +58,7 @@ require "comments.php";
 				</a>
 			</div>
 			<div id="rightHeader">
+	
 			<a href="http://localhost/twsurse/TW/Login.html" style="text-decoration:none;">
 				<input type="button" value="Logout" class="generalButton" onClick ="logOut()">
 				</a>
@@ -63,6 +66,7 @@ require "comments.php";
 		</div>
 		
 		<div id="adminUser">
+					<div class="divCurrentF">
 				<form action="allRaces.php" method="GET">
 					<fieldset class="fieldSetClass">
 						<legend>Past/Future Races</legend>
@@ -76,7 +80,13 @@ require "comments.php";
 					</fieldset>
 				</form> 
 			</div>
-			 
+			 	<div class="divCurrentR" style="<?php echo $currentRace->getStatus()?>">
+				<fieldset class="fieldSetClass">
+				<legend>Current Race</legend>
+					<a href="http://localhost/twsurse/TW/raceContainer.html?sessionId=<?php echo $_GET['sessionID']?>">Go to current race
+				</a>
+				</fieldset>
+				</div>
 	</div>
 </body>
 </html> 
