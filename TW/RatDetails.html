@@ -4,6 +4,7 @@
 <title>Rat Details</title>
   <link rel="stylesheet" type="text/css" href="AdminPage.css">
   <link rel="stylesheet" type="text/css" href="t.css">
+  <link rel="stylesheet" type="text/css" href="template.css">
 </head>
 <body>
    <div id="main">
@@ -23,7 +24,7 @@ $rd=new RatDetails();
 			<div id="addNewRace">
 				<form action="add race.html">	
 					<fieldset class="fieldSetClass">
-						<legend>Bet On Rat</legend>
+						<legend>About Rat</legend>
 					
 <div class="divLeft">						
 <br>Rat Name: 
@@ -50,19 +51,19 @@ echo $rd->getRatLoses();
 				
 					<fieldset class="fieldSetClass">
 						<legend>Attended Races:</legend>
-						  <table class="tabel">
-							<thead>
-								<th>Crt</th>
-								<th>Date</th>
-								<th>Time</th>
-								<th>Amount Bet</th>
-								<th>Earned Money</th>
-							<thead>
-							<tbody>
-								
-				
-							</tbody>
-						</table>
+							<table class="tabel">
+								<thead>
+									<th>Crt</th>
+									<th>Date</th>
+									<th>Status</th>
+								</thead>
+								<tbody>
+									<?php
+										$rd->getAttendRaces();
+									?>
+								</tbody>
+							
+							</table>
 					</fieldset>
 				 
 			</div>

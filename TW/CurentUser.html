@@ -17,7 +17,7 @@ $rd=new RatDetails();
 				
 			</div>
 			<div id="rightHeader">
-			<input type="button" value="LogOut" class="generalButton" onClick=";"></input>
+			<input type="button" value="LogOut" class="generalButton" ></input>
 			</div>
 		</div>
 
@@ -29,16 +29,15 @@ $rd=new RatDetails();
 							<table class="tabel">
 							<thead>
 								<th>Crt</th>
-								<th>Time</th>
-								<th>Concurent1</th>
-								<th>Concurent2</th>
+								<th>Date</th>
+								<th>Participant1 - Cota</th>
+								<th>Participant2 - Cota</th>
 							<thead>
 							<tbody>
 								<tr>
-									<td>ceva</td>
-									<td>ceva</td>
-									<td>ceva</td>
-									<td>ceva</td>
+								<?php
+									$rd->getTodayRaces();
+								?>
 								</tr>
 							</tbody>
 						</table>
@@ -46,7 +45,7 @@ $rd=new RatDetails();
 					
 <div class="divLeft">						
 <br><br>
-<a href="allraces.html?sessionID=<?php echo  $_GET['sessionID']?>">
+<a href="allraces.html?sessionID=<?php echo $_GET['sessionID']?>">
  <button type="button" class="generalButton">AllRaces</button>
 </a>
 </div>
@@ -62,17 +61,17 @@ $rd=new RatDetails();
 							<thead>
 								<th>Crt</th>
 								<th>Date</th>
-								<th>Time</th>
 								<th>Rat</th>
 								<th>Amount Bet</th>
+								<th>Earnings</th>
 							<thead>
 							<tbody>
 								<tr>
-									<td>ceva</td>
-									<td>ceva</td>
-									<td>ceva</td>
-									<td>ceva</td>
-									<td>ceva</td>
+									<?php
+									$rd->getYourBets();
+								?>
+								
+							</tbody>
 								</tr>
 							</tbody>
 						</table>

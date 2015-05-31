@@ -9,4 +9,4 @@ alter table users add sessionID VARCHAR(20);
 insert into users (firstName,lastName, birthdate,email,userName,password,safetyWord, role) values ('admin', 'admin', '2015-05-05','oana.nechiforescu@gmail.com','admin', 'admin', 'admin', 'admin');
 insert into users (firstName,lastName, birthdate,email,userName,password,safetyWord, role) values ('Oana', 'Nechiforescu', '1991-05-12','oana.nechiforescu@gmail.com','nyoany', '123', 'safetyword', 'user');
 alter table bets add ratID INT;
-alter table bets modify earnings float;
+alter table bets add earnings float;
