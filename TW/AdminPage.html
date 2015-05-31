@@ -41,10 +41,12 @@ $db =  new DbAdminPage();
 	<div id="main">
 		<div id="headerBar">
 			<div id="leftHeader">
-				<span id="page-title"><H1>Admin User:</H1></span>
+				<span id="page-title"><H1>Admin Page:</H1></span>
 			</div>
 			<div id="rightHeader">
-				<input type="submit" value="Logout" class="generalButton">
+				<a href="http://localhost/twsurse/TW/Login.html" style="text-decoration:none;">
+					<input type="button" value="Logout" class="generalButton" onClick ="logOut()">
+				</a>
 			</div>
 		</div>
 		
@@ -97,7 +99,7 @@ $db =  new DbAdminPage();
 				</form> 
 			</div>
 			<div class="divRight">
-				<form action="nu stiu.html">
+				<form action="allRacesExport.html">
 					<fieldset class="fieldSetClass">
 						<legend>Active Races:</legend>
 						<table class="tabel">
@@ -113,6 +115,8 @@ $db =  new DbAdminPage();
 								?>
 							</tbody>
 						</table>
+						<br><br>
+						<input type="submit" value="All Races" name="submitedButton" class="generalButton">
 					</fieldset>
 				</form> 
 			</div>

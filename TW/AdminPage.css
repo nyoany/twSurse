@@ -41,6 +41,11 @@ width: 80%;
 width: 80%; 
 }
 
+.Export{
+display: inline;
+float: right;
+}
+
 .fieldSetClass{
  margin: 100px;
  width: auto;

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>All Races</title>
+  <link rel="stylesheet" type="text/css" href="AdminPage.css">
+  <link rel="stylesheet" type="text/css" href="template.css">
+  <script type="text/javascript">
+ 
+function loadData(str) {
+
+    if (str == "") {
+        document.getElementById("txtHint").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","allRacesExport.php?q="+str,true);
+        xmlhttp.send();
+		
+    }
+}
+  </script>
+</head>
+
+<body>
+	<div id="main">
+		<div id="headerBar">
+			<div id="leftHeader">
+				<span id="page-title"><H1>All Races:</H1></span>
+				<a href="http://localhost/twsurse/TW/AdminPage.html">
+					<input type="button" value="Back" class="generalButton"></input>
+				</a>
+			</div>
+			<div id="rightHeader">
+				<a href="http://localhost/twsurse/TW/Login.html" style="text-decoration:none;">
+					<input type="button" value="Logout" class="generalButton" onClick ="logOut()">
+				</a>
+			</div>
+		</div>
+		<div id="adminUser">
+			<div class="divCurrentF">
+					<fieldset class="fieldSetClass">
+						<legend>Past/Future Races</legend>
+		                    <br><br>
+							<span id="participants">Select date: </span>
+							<form id="sub" action="Export.php" method="POST"></form>
+								<input id="date" type="date" name="date" form="sub" onchange="loadData(this.value)">
+								<div class="Export">
+									<input type="submit" name="CSV" form="sub" value="Export to CSV">
+									<input type="submit" name="JSON" form="sub" value="Export to JSON">
+									<input type="submit" name="HTML" form="sub" value="Export to HTML">
+								</div>
+							<br><br>
+							<div id="txtHint"><b>No data to display...</b>
+						</div>
+					</fieldset>
+			</div>
+		</div>
+	</div>
+</body>
+</html> 
