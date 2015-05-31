@@ -36,7 +36,7 @@ return $result;
 
 
 function verifyUserExists($username, $password){
-$result;
+$result = null;
 $servername = "localhost";
 $dbusername = "root";
 $dbpassword = "root";

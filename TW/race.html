@@ -30,6 +30,7 @@ function doMove() {
 	   $db->setLoserPosition();
 	   ?>
 	if(firstHamstersPosition >= 1084){
+	   
 		document.getElementById('firstMouse').style.left = '1084px';
 		document.getElementById('secondMouse').style.left = '<?php echo $db->getLoserPosition(); ?>px';
 		
@@ -37,7 +38,7 @@ function doMove() {
 	else if(secondHamstersPosition >= 1084){
 	    document.getElementById('secondMouse').style.left = '1084px';
 		document.getElementById('firstMouse').style.left = '<?php echo $db->getLoserPosition(); ?>px';
-	   
+	  
 	}
  }
  else{
@@ -53,10 +54,12 @@ function doMove() {
 	if(firstHamstersUpdatedPosition >= 1084){
 	document.getElementById('firstMouse').style.left = '1084px';
     document.getElementById('secondMouse').style.left = secondHamstersUpdatedPosition + 'px';
+	 alert("The first mouse won the race!!");
 	} 
 	else if(secondHamstersUpdatedPosition >=1084){
 	document.getElementById('firstMouse').style.left = firstHamstersUpdatedPosition+ 'px';
     document.getElementById('secondMouse').style.left = '1084px';
+	  alert("The second mouse won the race!!");
 	}
 	else{
   document.getElementById('firstMouse').style.left = firstHamstersUpdatedPosition+ 'px';
@@ -76,7 +79,7 @@ window.onload = init;
 
 <body>
 
-<h1>The race started!</h1>
+<h1>The race</h1>
 <div class= "pista">
 <div id="firstMouse">   
 </div>

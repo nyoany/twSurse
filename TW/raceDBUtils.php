@@ -2,6 +2,27 @@
 
 class RaceDbUtils{
 
+
+function startRace(){
+
+$servername = "localhost";
+$dbusername = "root";
+$dbpassword = "root";
+$dbname = "dball";
+// Create connection
+$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection to database failed: " . $conn->connect_error);
+}
+
+$winnerQ = "Select winner from currentrace;";
+
+
+
+}
+
 function verifyStillRunning(){
 $result = 0;
 $servername = "localhost";

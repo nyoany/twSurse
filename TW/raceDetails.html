@@ -7,7 +7,7 @@
   <link rel="stylesheet" type="text/css" href="template.css">
  <script>
 
-function logOut(){
+function logOutScript(){
   <?php
   if(isset($_COOKIE["username"])){
   unset($_COOKIE["username"]);
@@ -50,8 +50,8 @@ $raceDetails = new RaceDetails();
 				</a>
 			</div>
 			<div id="rightHeader">
-					<a href="http://localhost/twsurse/TW/Login.html" style="text-decoration:none;">
-				<input type="button" value="Logout" class="generalButton" onClick ="logOut()">
+					<a href="http://localhost/twsurse/TW/logOut.html?sessionID=<?php echo $_GET['sessionID']?>" style="text-decoration:none;">
+				<input type="button" value="Logout" class="generalButton">
 				</a>
 			</div>
 		</div>

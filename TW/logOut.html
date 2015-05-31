@@ -1,0 +1,15 @@
+<html>
+<?php
+
+$servername = "localhost";
+$dbusername = "root";
+$dbpassword = "root";
+$dbname = "dball";
+// Create connection
+$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+
+$loggedinQ ="update users set sessionID = NULL where sessionID = '".$_GET["sessionID"] ."';";
+$conn->query($loggedinQ);
+header ('Location:http://localhost/twsurse/TW/login.html');
+?>
+</html>
