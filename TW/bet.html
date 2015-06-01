@@ -49,8 +49,9 @@ if ($userIDQ->num_rows > 0) {
 while($row = $userIDQ->fetch_assoc()) {
 $userID = $row["id"];
 $insertComm = "INSERT INTO bets (userID, raceID, amount, ratID, earnings) VALUES ('".$userID."','". $_GET["raceID"]."','" .$_POST["amount"]."','". $competitor."',0);";
-echo $insertComm;
+$substractAmount = "update users set money = money -".$_POST["amount"]." where id = " .$userID.";";
 $conn->query($insertComm);
+$conn->query($substractAmount);
 }
 }
 }

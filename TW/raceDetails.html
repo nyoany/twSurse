@@ -5,6 +5,10 @@
   <title>Race Details</title>
   <link rel="stylesheet" type="text/css" href="AdminPage.css">
   <link rel="stylesheet" type="text/css" href="template.css">
+  <?php
+require "raceDetails.php";
+$raceDetails = new RaceDetails();
+?>
  <script>
 
 function logOutScript(){
@@ -37,10 +41,6 @@ return false;
 </head>
 
 <body>
-<?php
-require "raceDetails.php";
-$raceDetails = new RaceDetails();
-?>
 	<div id="main">
 		<div id="headerBar">
 			<div id="leftHeader">
@@ -66,7 +66,7 @@ $raceDetails = new RaceDetails();
 							?>
 		
 		</fieldset>
-			<fieldset class="fieldSetClass" style="display:<?php echo $raceDetails->getWinner();?>">
+			<fieldset class="fieldSetClass" style="display:<?php echo $raceDetails->getStyle();?>">
 		<br>
 		<legend>Bet on a rat from this race:</legend>
 		<b><i>You have time until <?php echo $raceDetails->getAvailableTime();?> to bet.</i></b>
@@ -75,7 +75,8 @@ $raceDetails = new RaceDetails();
 		<input type = "checkbox" id="first" name = "r1" value="r1" onclick = "verifyErrorFree()"/><?php echo $raceDetails->getBetSectionR1();?>
 		<input type = "checkbox" id="second" name = "r2" value="r2" onclick = "verifyErrorFree()"/><?php echo $raceDetails->getBetSectionR2();?>
 							<br><br>
-		<b>Amount: </b><input type="text" name="amount" value="0">
+		<b>Amount: </b>
+		<input type="number" name="amount" value="0" min ="0" max=<?php echo $raceDetails->getAvailableMoney()?>>
 		<br><br>
 		<input type="submit" value="Bet" class="generalButton">
 		</form>

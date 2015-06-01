@@ -15,6 +15,39 @@ return $_GET['sessionID'];
 return null;
 }
 
+function verifyUserDidNotBetAlready(){
+
+$servername = "localhost";
+$dbusername = "root";
+$dbpassword = "root";
+$dbname = "dball";
+// Create connection
+$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+$userID =null;
+// Check connection
+if ($conn->connect_error) {
+    die("Connection to database failed: " . $conn->connect_error);
+}
+$sessionID = $this->getCurrentSessionID();
+if($sessionID!=null){
+$getUserID ="select id from users where sessionID='".$sessionID."';";
+$userIDQ= $conn->query($getUserID);
+if ($userIDQ->num_rows > 0) {
+while($row = $userIDQ->fetch_assoc()) {
+$userID = strval($row["id"]);
+}
+}}
+$raceID = $this->getCurrentRaceID();
+if($raceID!=null){
+$getBetsQ ="select name from rats where id = (select ratID from bets where userID=".$userID." and raceID = ".$raceID .");";
+$betsR= $conn->query($getBetsQ);
+if ($betsR->num_rows >= 1) {
+while($ratB = $betsR->fetch_assoc()) {
+return $ratB["name"];
+}}}
+return null;
+}
+
 function getComments(){
 
 $result = "";
@@ -164,7 +197,7 @@ return $result;
 }
 }
 
-function getWinner(){
+function getStyle(){
 
 $servername = "localhost";
 $dbusername = "root";
@@ -182,19 +215,37 @@ $sql = "select DISTINCT DATE_SUB((select date from races where id=" .$this->getC
 .$this->getCurrentRaceID() ."),INTERVAL 1 HOUR)-NOW()>0;";
 $queryr = $conn->query($sql);
 
-if ($queryr->num_rows <= 0){ 
+if ($queryr->num_rows <= 0 || ($this->verifyUserDidNotBetAlready()!= null)){ 
 return "none;";
-}
-
-while($row = $queryr->fetch_assoc()) {
-
-if($row["date2"] != null){
-return $row["date2"];
-}
 }
 return "block;";
 }
 }
+
+function getAvailableMoney(){
+
+$servername = "localhost";
+$dbusername = "root";
+$dbpassword = "root";
+$dbname = "dball";
+// Create connection
+$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+$userID =null;
+// Check connection
+if ($conn->connect_error) {
+    die("Connection to database failed: " . $conn->connect_error);
+}
+$sessionID = $this->getCurrentSessionID();
+if($sessionID!=null){
+$getUserID ="select money, id from users where sessionID='".$sessionID."';";
+$userIDQ= $conn->query($getUserID);
+if ($userIDQ->num_rows > 0) {
+while($row = $userIDQ->fetch_assoc()) {
+$money = strval($row["money"]);
+return $money; 
+}
+}
+}}
 
 function getAvailableTime(){
 

@@ -27,5 +27,12 @@ return "display:none;";
 }
 return "display:block;";
 }
+
+function setEarnedMoney(){
+
+
+
+}
+
 }
 ?>
