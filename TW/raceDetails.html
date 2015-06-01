@@ -76,7 +76,7 @@ return false;
 		<input type = "checkbox" id="second" name = "r2" value="r2" onclick = "verifyErrorFree()"/><?php echo $raceDetails->getBetSectionR2();?>
 							<br><br>
 		<b>Amount: </b>
-		<input type="number" name="amount" value="0" min ="0" max=<?php echo $raceDetails->getAvailableMoney()?>>
+		<input type="number" step="any" name="amount" value="0" min ="0" max=<?php echo $raceDetails->getAvailableMoney()?>>
 		<br><br>
 		<input type="submit" value="Bet" class="generalButton">
 		</form>
