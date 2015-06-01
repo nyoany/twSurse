@@ -1,6 +1,5 @@
 <html>
 <?php
-	echo "<script>alert('Daaaa');</script>";
 	$result;
 	$servername = "localhost";
 	$dbusername = "root";
@@ -14,13 +13,8 @@
 		die("Connection to database failed: " . $conn->connect_error);
 	}
 	
-	$sql = "UPDATE currentrace SET firstratposition = 0, secondratposition = 0, winner = 'none', status = 'running', loserfinalposition=0, updatedall = null WHERE ID = 1;";
-	echo "<script>alert('".$sql."');</script>";
-		if ($conn->query($sql) === TRUE) {
-			$result = "Error.";
-		} else {
-			$result = "Error: " . $sql . "<br>" . $conn->error;
-		}
+	$sql = "UPDATE currentrace SET firstratposition = 0, secondratposition = 0, winner = 'none', status = 'running', loserfinalposition=0, raceID = ".$_GET['raceID'].", updatedall = null WHERE ID = 1;";
+    $conn->query($sql);
 	
 	$conn->close();
 	$url="raceContainer.html";
