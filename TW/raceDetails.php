@@ -87,7 +87,7 @@ $usernameF = $conn->query($usernameQ);
 
 while($username = $usernameF->fetch_assoc()){
 
-$result = $result ."<br><b>" .$username["username"] . " commented on " .$row["date"]. " : </b>" .$row["commentary"] . ".<br>";
+$result = $result ."<br><b>" .$username["username"] . " commented on " .$row["date"]. " : </b>" .$row["commentary"] . "<br>";
 }
 }
 }

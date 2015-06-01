@@ -3,23 +3,6 @@
 class RaceDbUtils{
 
 
-function startRace(){
-
-$servername = "localhost";
-$dbusername = "root";
-$dbpassword = "root";
-$dbname = "dball";
-// Create connection
-$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection to database failed: " . $conn->connect_error);
-}
-
-$winnerQ = "Select winner from currentrace;";
-}
-
 function verifyStillRunning(){
 $result = 0;
 $servername = "localhost";
@@ -104,6 +87,49 @@ $conn->close();
 
 }
 }
+
+
+function setEarnedMoney(){
+
+$winner = $this->getWinner();
+$servername = "localhost";
+$dbusername = "root";
+$dbpassword = "root";
+$dbname = "dball";
+// Create connection
+$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection to database failed: " . $conn->connect_error);
+}
+$users = null;
+$updateEarnings = null;
+$racesWinner = null;
+if(strval($winner)== "first" || strval($winner)== "second"){
+if(strval($winner)== "first"){
+$racesWinner = "update races set winner = participant1 where id = (select raceID from currentrace);";
+$users = "select userID from bets where ratID = (select participant1 from races where id = (select raceID from currentrace)) and raceID =(select raceID from currentrace);";
+$updateEarnings = "update bets set earnings = (select cota from races where id = (select raceID from currentrace))*amount where ratID = (select participant1 from races where id = (select raceID from currentrace)) and raceID = (select raceID from currentrace);";
+}
+else if(strval($winner)== "second"){
+$racesWinner = "update races set winner = participant2 where id = (select raceID from currentrace);";
+$users = "select userID from bets where ratID = (select participant2 from races where id = (select raceID from currentrace)) and raceID =(select raceID from currentrace);";
+$updateEarnings = "update bets set earnings = (select cota from races where id = (select raceID from currentrace))*amount where ratID = (select participant2 from races where id = (select raceID from currentrace)) and raceID = (select raceID from currentrace);";
+}
+
+$conn->query($updateEarnings);
+$conn->query($racesWinner);
+$usersB = $conn->query($users);
+if ($usersB->num_rows > 0) {
+ while($user = $usersB->fetch_assoc()) {
+$currentUser= $user["userID"];
+$updateMoney ="update users set money = money + (select earnings from bets where userID = ".$currentUser." and raceID = (select raceID from currentrace)) where id = ".$currentUser.";";
+$conn->query($updateMoney);
+}
+}
+}}
+
 
 function getFirstRatFinalPosition(){
 $result;
