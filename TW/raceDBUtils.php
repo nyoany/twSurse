@@ -103,6 +103,9 @@ $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 if ($conn->connect_error) {
     die("Connection to database failed: " . $conn->connect_error);
 }
+if ($this->verifyNotRunYet()==false){
+return;
+}
 $users = null;
 $updateEarnings = null;
 $racesWinner = null;
@@ -128,8 +131,30 @@ $updateMoney ="update users set money = money + (select earnings from bets where
 $conn->query($updateMoney);
 }
 }
+$conn->query("update currentrace set updatedall='true';");
 }}
 
+
+function verifyNotRunYet(){
+
+// Create connection
+$conn = new mysqli("localhost", "root", "root", "dball");
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection to database failed: " . $conn->connect_error);
+}
+
+$verifyQ = $conn->query("select updatedall from currentrace;");
+if ($verifyQ->num_rows > 0) {
+ while($updatedallV = $verifyQ->fetch_assoc()) {
+$updatedall= $updatedallV["updatedall"];
+if($updatedall == null){
+return true;
+}
+return false;
+}
+}}
 
 function getFirstRatFinalPosition(){
 $result;
