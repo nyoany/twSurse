@@ -62,7 +62,12 @@ function loadData(str) {
 									<input type="submit" name="HTML" form="sub" value="Export to HTML">
 								</div>
 							<br><br>
-							<div id="txtHint"><b>No data to display...</b>
+							<div id="txtHint">
+								<?php
+								require "AllBets.php";
+								$displayBets = new AllBets();
+								$displayBets->getAllBets();
+								?>
 						</div>
 					</fieldset>
 			</div>
