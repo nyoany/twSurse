@@ -51,9 +51,9 @@ if (isset($_POST['CSV']))
 
 	//$response['posts'] = $posts;
 
-	$fp = fopen('results.json', 'w');
-	fwrite($fp, json_encode($posts));
-	fclose($fp);
+	//$fp = fopen('C:\Users\Alex\Downloads\results.json', 'w');
+	fwrite($output, json_encode($posts));
+	fclose($output);
 }else if(isset($_POST['HTML']))
 {
 	// output headers so that the file is downloaded rather than displayed
