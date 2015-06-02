@@ -55,8 +55,59 @@ class DbUpdateRace{
 		return $result;
 	}
 	
+	function getDate(){
+		$result;
+		$servername = "localhost";
+		$dbusername = "root";
+		$dbpassword = "root";
+		$dbname = "dball";
+		// Create connection
+		$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 
+		// Check connection
+		if ($conn->connect_error) {
+			die("Connection to database failed: " . $conn->connect_error);
+		}
+		
+		$sql = "select DATE_FORMAT(date,'%d-%m-%Y') as date from races where id = ".$_GET['raceID'].";";
+
+		$positions = $conn->query($sql);
+		if ($positions->num_rows > 0) {
+			 while($row = $positions->fetch_assoc()) {
+				$result = $row['date'];
+			 }
+		}
+		
+		$conn->close();
+		return $result;
+	}
 	
+	function getTime(){
+		$result;
+		$servername = "localhost";
+		$dbusername = "root";
+		$dbpassword = "root";
+		$dbname = "dball";
+		// Create connection
+		$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
+
+		// Check connection
+		if ($conn->connect_error) {
+			die("Connection to database failed: " . $conn->connect_error);
+		}
+		
+		$sql = "select DATE_FORMAT(date,'%H:%i') as time from races where id = ".$_GET['raceID'].";";
+		echo "<script>alert('".$sql."');</script>";
+		$positions = $conn->query($sql);
+		if ($positions->num_rows > 0) {
+			 while($row = $positions->fetch_assoc()) {
+				$result = $row['time'];
+			 }
+		}
+		
+		$conn->close();
+		return $result;
+	}
 	
 	
 	

@@ -58,7 +58,7 @@ $db =  new DbAdminPage();
 						<div class="divLeft">
 							<span id="participants">Participants</span>
 							<br><br>1:
-							<select id="participant1" name="participant1" onchange="show(this.value, 'participant2')">
+							<select id="participant1" name="participant1" required="true" onchange="show(this.value, 'participant2')">
 								<?php 
 									$result = $db->getParticipants();
 									echo "<option>"." "."</option>";
@@ -69,7 +69,7 @@ $db =  new DbAdminPage();
 								?>
 							</select>
 							<br><br>2:
-							<select id="participant2" name="participant2">
+							<select id="participant2" name="participant2" required="true">
 								<?php 
 									$result = $db->getParticipants();
 									echo "<option>"." "."</option>";
@@ -81,19 +81,19 @@ $db =  new DbAdminPage();
 							</select>
 							<br><br>
 							<span id="Date">Date</span>
-							<input type="date" name="date">
+							<input type="date" name="date" required="true">
 							<br><br>
 							<input type="submit" value="Add Race" name="submitedButton" class="generalButton">
 						</div>
 						<div class="divRight">
 							<span id="cota">Cota</span>
 							<br><br>
-							<input type="text" name="cota1">
+							<input type="text" name="cota1" required="true">
 							<br><br>
-							<input type="text" name="cota2">
+							<input type="text" name="cota2" required="true">
 							<br><br>
 							<span id="Time">Time</span>
-							<input type="time"  name="time">
+							<input type="time"  name="time" required="true">
 						</div>
 					</fieldset>
 				</form> 

@@ -6,7 +6,7 @@ class AllBets{
 	if (!$conn) {
 		die('Could not connect: ' . mysqli_error($conn));
 	}
-	$sql = "Select DISTINCT DATE_FORMAT(r.date,'%d-%m-%Y') as date, DATE_FORMAT(r.date,'%h:%i:00') as time, r1.name as r1, 
+	$sql = "Select DISTINCT DATE_FORMAT(r.date,'%d-%m-%Y') as date, DATE_FORMAT(r.date,'%H:%i:00') as time, r1.name as r1, 
 	 (select count(ratID) from bets where ratId=r.participant1 and raceID = r.id) as b1, r2.name as r2,
 	 (select count(ratID) from bets where ratId=r.participant2 and raceID = r.id) as b2
 		 from races as r, rats as r1, rats as r2, bets as b

@@ -44,7 +44,7 @@ class DbAdminPage{
 			die("Connection to database failed: " . $conn->connect_error);
 		}
 		
-		$sql = "Select r.id, DATE_FORMAT(r.date,'%d-%m-%Y') as date, DATE_FORMAT(r.date,'%h:%i:00') as time, r1.name as r1, r2.name as r2 from races as r, rats as r1, rats as r2 where (date > curdate()) and (r1.id = r.participant1) and (r2.id = r.participant2);";
+		$sql = "Select r.id, DATE_FORMAT(r.date,'%d-%m-%Y') as date, DATE_FORMAT(r.date,'%H:%i:00') as time, r1.name as r1, r2.name as r2 from races as r, rats as r1, rats as r2 where (date > curdate()) and (r1.id = r.participant1) and (r2.id = r.participant2);";
 
 		$positions = $conn->query($sql);
 		if ($positions->num_rows > 0) {

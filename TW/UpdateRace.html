@@ -63,7 +63,7 @@
 							<?php echo "<input type='text' value='".$autoPopulate->getCota("cota2")."' disabled='true'>";?>
 							<br><br>
 							<span id="Time">Time</span>
-							<?php echo "<input type='time' name='time' value='".$_GET['time']."'>";?>
+							<?php echo "<input type='time' name='time' value='".$autoPopulate->getTime()."'>";?>
 							<br><br>
 							<a href="startRace.html?raceID=<?php echo $_GET['raceID']?>">
 							<input type="button" id="StartRace" value="Start Race">
@@ -75,7 +75,7 @@
 			<div class="divRight">
 				<form action="nu stiu.html">
 					<fieldset class="fieldSetClass">
-						<legend>Active Races:</legend>
+						<legend>List of Bettors:</legend>
 						<table class="tabel">
 							<thead>
 								<th>Crt</th>
