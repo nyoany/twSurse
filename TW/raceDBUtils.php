@@ -109,20 +109,24 @@ return;
 $users = null;
 $updateEarnings = null;
 $racesWinner = null;
+$updateRatsWins =null;
 if(strval($winner)== "first" || strval($winner)== "second"){
 if(strval($winner)== "first"){
+$updateRatsWins = "update rats set wins = wins + 1 where id = (select participant1 from races where id = (select raceID from currentrace))";
 $racesWinner = "update races set winner = participant1 where id = (select raceID from currentrace);";
 $users = "select userID from bets where ratID = (select participant1 from races where id = (select raceID from currentrace)) and raceID =(select raceID from currentrace);";
-$updateEarnings = "update bets set earnings = (select cota from races where id = (select raceID from currentrace))*amount where ratID = (select participant1 from races where id = (select raceID from currentrace)) and raceID = (select raceID from currentrace);";
+$updateEarnings = "update bets set earnings = (select cota1 from races where id = (select raceID from currentrace))*amount where ratID = (select participant1 from races where id = (select raceID from currentrace)) and raceID = (select raceID from currentrace);";
 }
 else if(strval($winner)== "second"){
+$updateRatsWins = "update rats set wins = wins + 1 where id = (select participant2 from races where id = (select raceID from currentrace))";
 $racesWinner = "update races set winner = participant2 where id = (select raceID from currentrace);";
 $users = "select userID from bets where ratID = (select participant2 from races where id = (select raceID from currentrace)) and raceID =(select raceID from currentrace);";
-$updateEarnings = "update bets set earnings = (select cota from races where id = (select raceID from currentrace))*amount where ratID = (select participant2 from races where id = (select raceID from currentrace)) and raceID = (select raceID from currentrace);";
+$updateEarnings = "update bets set earnings = (select cota2 from races where id = (select raceID from currentrace))*amount where ratID = (select participant2 from races where id = (select raceID from currentrace)) and raceID = (select raceID from currentrace);";
 }
 
 $conn->query($updateEarnings);
 $conn->query($racesWinner);
+$conn->query($updateRatsWins);
 $usersB = $conn->query($users);
 if ($usersB->num_rows > 0) {
  while($user = $usersB->fetch_assoc()) {

@@ -6,7 +6,7 @@ if (!$conn) {
     die('Could not connect: ' . mysqli_error($conn));
 }
 $without = str_replace('-', '', strval($q));
-$sql = " Select DATE_FORMAT(r.date,'%d-%m-%Y') as date, DATE_FORMAT(r.date,'%h:%i:00') as time, r1.name as r1, 
+$sql = "Select DISTINCT DATE_FORMAT(r.date,'%d-%m-%Y') as date, DATE_FORMAT(r.date,'%h:%i:00') as time, r1.name as r1, 
  (select count(ratID) from bets where ratId=r.participant1) as b1, r2.name as r2,
  (select count(ratID) from bets where ratId=r.participant2) as b2
      from races as r, rats as r1, rats as r2, bets as b

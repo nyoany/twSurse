@@ -44,7 +44,7 @@ $conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
 if ($conn->connect_error) {
     die("Connection to database failed: " . $conn->connect_error);
 }
-$inter="select wins from rats; ";
+$inter="select wins from rats where name = '" .$_GET['RatName'] ."';";
  
 $ratwins=$conn->query($inter);
 if($ratwins->num_rows>0){
