@@ -116,9 +116,9 @@ function getAttendRaces(){
 				
   				echo "<td>";
 	            if ($row["name"] == $_GET['RatName']){
-					echo "Win";
+					echo "Won";
 				}else {
-					echo "Loses";
+					echo "Lost";
 				}
 				echo "</td></tr>";		
 				$index = $index + 1;
@@ -127,61 +127,6 @@ function getAttendRaces(){
 		
 		$conn->close();
 }
-
-
-	/*function getAttendRaces(){
-		$index = 1;
-		$servername = "localhost";
-		$dbusername = "root";
-		$dbpassword = "root";
-		$dbname = "dball";
-		// Create connection
-		$conn = new mysqli($servername, $dbusername, $dbpassword, $dbname);
-
-		// Check connection
-		if ($conn->connect_error) {
-			die("Connection to database failed: " . $conn->connect_error);
-		}
-	//	$userq = "select id from users where sessionid = " .$_GET["sessionID"]; 
-	     $sql="select date, winner from races where winner != NULL and (races.participant1 = ratid or races prticipant2 = ratid);" ;
-		
-		
-		
-		$$sql = $conn->query($userq);
-		if ($sql->num_rows > 0) {
-			 while($useridRow = $sql->fetch_assoc()) {
-				 
-				 $userID = $useridRow["id"];
-			 $amountq = "select amount from bets where userid=".$userID ."and raceid=".$_GET["raceID"];
-				 
-				 $amountr = $conn->query($amountq);
-		if ($amountr->num_rows > 0) {
-			 while($amountRow = $amountr->fetch_assoc()) 
-			 {
-				 
-				echo "<tr><td>";
-				echo $index;
-				echo "</td>";
-				
-  				echo "<td>";
-	            echo $row["date"];
-				echo "</td>";
-				
-  				echo "<td>";
-	            echo $row["status"];
-				echo "</td>";				
-					
-			 }
-			
-			}
-		
-		$conn->close(); 
-	}
-*/
-	
-	
-	
-	
 	
 	
 	function getTodayRaces(){

@@ -10,14 +10,18 @@
 <?php
 require 'RatDetailsDB.php';
 $rd=new RatDetails();
+require 'userData.php';
+$userD = new UserData();
 ?>
 <div id="headerBar">
 			<div id="leftHeader">
-				<span id="page-title"><H1>Curent User:</H1></span>
+				<span id="page-title"><H1>Curent User: <?php $userD->getUserData()?> </H1></span>
 				
 			</div>
 			<div id="rightHeader">
-			<input type="button" value="LogOut" class="generalButton" ></input>
+				<a href="http://localhost/twsurse/TW/logOut.html?sessionID=<?php echo $_GET['sessionID']?>" style="text-decoration:none;">
+				<input type="button" value="Logout" class="generalButton">
+				</a>
 			</div>
 		</div>
 

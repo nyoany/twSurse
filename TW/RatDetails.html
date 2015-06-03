@@ -11,13 +11,19 @@
 <?php
 require 'RatDetailsDB.php';
 $rd=new RatDetails();
+require 'userData.php';
+$userD = new UserData();
 ?>
 <div id="headerBar">
 			<div id="leftHeader">
-				<span id="page-title"><H1>Rat Details:</H1></span>
+				<span id="page-title"><H1>Rat Details: <?php $userD->getUserData()?></H1></span>
 				<input type="button" value="Back" class="generalButton" onClick="history.go(-1);return true;"></input>
 			</div>
-					
+			<div id="rightHeader">
+					<a href="http://localhost/twsurse/TW/logOut.html?sessionID=<?php echo $_GET['sessionID']?>" style="text-decoration:none;">
+				<input type="button" value="Logout" class="generalButton">
+				</a>
+			</div>	
 		</div>
 			
 	<div id="adminUser">

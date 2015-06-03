@@ -8,17 +8,10 @@
   <?php
 require "raceDetails.php";
 $raceDetails = new RaceDetails();
+require 'userData.php';
+$userD = new UserData();
 ?>
  <script>
-
-function logOutScript(){
-  <?php
-  if(isset($_COOKIE["username"])){
-  unset($_COOKIE["username"]);
-  setCookie("username", "", time()-3600, "/","localhost");
-  }
-  ?>
- }
 
 function verifyErrorFree(){
 
@@ -44,7 +37,7 @@ return false;
 	<div id="main">
 		<div id="headerBar">
 			<div id="leftHeader">
-				<span id="page-title"><H1>Race Details:</H1></span>
+				<span id="page-title"><H1>Race Details: <?php $userD->getUserData()?></H1></span>
 				<a href="http://localhost/twsurse/TW/allraces.html?sessionID=<?php echo $_GET['sessionID']?>">
 				<input type="button" value="Back" class="generalButton"></input>
 				</a>
