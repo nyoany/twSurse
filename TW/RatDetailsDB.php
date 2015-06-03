@@ -100,7 +100,7 @@ function getAttendRaces(){
 		}
 		
         
-			     $sql="select date, name from races, rats where winner is not NULL and (races.participant1 = (select id from rats r where r.name = '".$_GET['RatName']."') or races.participant2 = (select id from rats r where r.name = '".$_GET['RatName']."')) and rats.name = '".$_GET['RatName']."';" ;
+			     $sql="select date, winner,rr.id, name from races, rats as rr where winner is not NULL and (races.participant1 = (select id from rats r where r.name = '".$_GET['RatName']."') or races.participant2 = (select id from rats r where r.name = '".$_GET['RatName']."')) and rr.name = '".$_GET['RatName']."';" ;
 
 		
 		$positions = $conn->query($sql);
@@ -115,7 +115,7 @@ function getAttendRaces(){
 				echo "</td>";
 				
   				echo "<td>";
-	            if ($row["name"] == $_GET['RatName']){
+	            if ($row["winner"] == $row["id"]){
 					echo "Won";
 				}else {
 					echo "Lost";

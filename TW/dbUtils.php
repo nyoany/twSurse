@@ -21,9 +21,9 @@ if($this->verifyUserExists($username, $password) != null){
 return "A user with the username ".$username." already exists in the system.";
 }
 
-$sql = "INSERT INTO users (firstname, lastname, birthdate, email, username, password, safetyword, role)
+$sql = "INSERT INTO users (firstname, lastname, birthdate, email, username, password, safetyword, role, money)
 VALUES ('" .$firstname ."','" .$lastname ."','"
- .$birthdate ."','" .$email ."','" .$username ."', '" .$password ."', '" .$safetyword ."','user')";
+ .$birthdate ."','" .$email ."','" .$username ."', '" .$password ."', '" .$safetyword ."','user', 1000)";
 
 if ($conn->query($sql) === TRUE) {
     $result = "You have been added successfully to the site. Please login.";
